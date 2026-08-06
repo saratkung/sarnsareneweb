@@ -4,36 +4,43 @@ import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
 import OurStory from "@/components/OurStory";
 import EasternInspiration from "@/components/EasternInspiration";
-import SignatureExperience from "@/components/SignatureExperience";
 import HighlightQuote from "@/components/HighlightQuote";
 import BrandManifesto from "@/components/BrandManifesto";
-import FeaturedCollection from "@/components/FeaturedCollection";
-import JourneyForward from "@/components/JourneyForward";
-import ComplimentaryServices from "@/components/ComplimentaryServices";
-import Sustainability from "@/components/Sustainability";
-import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import SectionTheme from "@/components/SectionTheme";
 
 export default function Home() {
   return (
     <>
-      <AnnouncementBar />
-      <Nav />
+      <SectionTheme name="announcement">
+        <AnnouncementBar />
+      </SectionTheme>
+      <SectionTheme name="nav">
+        <Nav />
+      </SectionTheme>
       <main>
-        <Hero />
-        <Philosophy />
-        <OurStory />
-        <EasternInspiration />
-        <SignatureExperience />
-        <HighlightQuote />
-        <BrandManifesto />
-        <FeaturedCollection />
-        <JourneyForward />
-        <ComplimentaryServices />
-        <Sustainability />
-        <Newsletter />
+        <SectionTheme name="hero">
+          <Hero />
+        </SectionTheme>
+        <SectionTheme name="philosophy">
+          <Philosophy />
+        </SectionTheme>
+        <SectionTheme name="ourStory">
+          <OurStory />
+        </SectionTheme>
+        <SectionTheme name="eastern">
+          <EasternInspiration />
+        </SectionTheme>
+        <SectionTheme name="quote">
+          <HighlightQuote />
+        </SectionTheme>
+        <SectionTheme name="manifesto">
+          <BrandManifesto />
+        </SectionTheme>
       </main>
-      <Footer />
+      <SectionTheme name="footer">
+        <Footer />
+      </SectionTheme>
     </>
   );
 }

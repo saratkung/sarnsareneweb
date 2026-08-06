@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { signatureExperience } from "@/lib/content";
+import { en } from "@/lib/translations";
+import { useLanguage } from "@/components/LanguageContext";
 import { Reveal, staggerContainer, staggerItem } from "@/components/Reveal";
 
 export default function SignatureExperience() {
+  const { lang } = useLanguage();
+
   return (
     <section className="bg-bg py-24 md:py-32">
       <div className="max-w-content mx-auto px-6 md:px-10">
@@ -28,16 +32,16 @@ export default function SignatureExperience() {
               variants={staggerItem}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="group border border-white/10 p-10 flex flex-col gap-5 transition-colors duration-500 hover:border-gold/50 hover:bg-bg-secondary"
+              className="group border border-text-light/8 p-10 flex flex-col gap-5 transition-colors duration-500 hover:border-gold/50 hover:bg-bg-secondary"
             >
-              <span className="text-[11px] tracking-widest2 text-gold font-sans">
+              <span className="text-[11px] tracking-widest2 text-text-muted font-sans">
                 0{i + 1}
               </span>
               <h3 className="font-serif text-xl text-text-light">
                 {card.title}
               </h3>
               <p className="text-text-muted text-[13px] leading-relaxed font-light">
-                {card.description}
+                {lang === "en" ? en.signatureExperience.cards[i]?.description ?? card.description : card.description}
               </p>
               <span className="mt-2 w-8 h-px bg-gold/50 transition-all duration-500 group-hover:w-16" />
             </motion.div>

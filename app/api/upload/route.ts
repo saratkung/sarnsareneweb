@@ -7,6 +7,7 @@ import path from "path";
 const SLOT_TO_FILENAME: Record<string, string> = {
   hero: "hero.jpg",
   story: "story.jpg",
+  "story-banner": "story-banner.jpg",
   "eastern-1": "eastern-1.jpg",
   "eastern-2": "eastern-2.jpg",
   "product-1": "product-1.jpg",

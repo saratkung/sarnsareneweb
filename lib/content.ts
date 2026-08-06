@@ -11,56 +11,54 @@ export const brand = {
 };
 
 export const announcement = {
-  message: "SARNSARENE — Contemporary Thai Craft · หรูอย่างสงบ",
+  message: "",
 };
 
 export const nav = {
   links: [
-    { label: "Philosophy", href: "#philosophy" },
+    { label: "The meaning behind the name", href: "#philosophy" },
     { label: "Our Roots", href: "#story" },
-    { label: "The Tote", href: "#collection" },
-    { label: "Journal", href: "#sustainability" },
   ],
 };
 
 export const hero = {
-  eyebrow: "SARNSARENE — Est. Bangkok",
-  title: "หรูอย่างสงบ",
-  subtitle:
-    "แบรนด์ดีไซน์ไทยร่วมสมัยที่ยกระดับวัสดุและงานทอไทย ให้เป็นผลิตภัณฑ์ที่ใช้งานได้จริง แข็งแรง และหรูแบบสงบในทุกวัน",
-  ctaPrimary: { label: "Explore The Tote", href: "#collection" },
-  ctaSecondary: { label: "Our Philosophy", href: "#philosophy" },
+  eyebrow: "",
+  title: "WOVEN SERENITY",
+  subtitle: "สัมผัสแห่งความสงบอันปราณีต",
+  ctaPrimary: { label: "", href: "#collection" },
+  ctaSecondary: { label: "", href: "#philosophy" },
   image: "/images/hero.jpg",
 };
 
 export const philosophy = {
-  eyebrow: "Core Values",
-  title: "Our Philosophy",
+  eyebrow: "",
+  title: "The meaning behind the name",
   items: [
-    { icon: "circle" as const, title: "Balance", description: "นุ่มนวล แต่มั่นคง — ความสมดุลระหว่างความอ่อนโยนของงานทอกับความแข็งแรงที่ใช้งานได้จริงในทุกวัน" },
-    { icon: "weave" as const, title: "Contemporary Thai Craft", description: "งานทอไทยที่ถูกยกระดับด้วยดีไซน์ร่วมสมัย ผสานภูมิปัญญาดั้งเดิมเข้ากับรูปทรงที่ใช้งานได้จริง" },
-    { icon: "drop" as const, title: "Quiet Luxury", description: "ความหรูหราที่ไม่ต้องตะโกน สื่อสารผ่านรายละเอียด วัสดุ และงานฝีมือที่ประณีต" },
-    { icon: "leaf" as const, title: "Considered Living", description: "ใช้ชีวิตอย่างตั้งใจ เลือกสิ่งที่มีความหมาย และอยู่กับของที่ดีไปได้นาน" },
+    { icon: "weave" as const, title: "SARN", description: "รากจากภาษาไทย \"สาน\" สะท้อนศิลปะแห่งการเชื่อมโยงผู้คนและวัฒนธรรม ให้ก่อกำเนิดคุณค่าที่ยั่งยืน" },
+    { icon: "drop" as const, title: "SERENE", description: "รากจากภาษาละติน serēnus สะท้อนความสงบอันบริสุทธิ์ ความแจ่มใส และความมั่นคงจากภายใน" },
   ],
 };
 
 export const ourStory = {
-  eyebrow: "Where It Began",
-  title: "Our Roots",
+  eyebrow: "",
+  title: "Brand Philosophy & Story",
+  rootHeading: "Our Roots",
+  bannerSubtitle: "",
   paragraphs: [
-    "ชื่อ SARNSARENE มาจากคำว่า “สาน” — การถักทอเส้นด้ายให้กลายเป็นผืนผ้า และ “Serene” ความสงบนิ่ง สองความหมายที่ประกอบกันเป็นหัวใจของแบรนด์ นั่นคือการสานความสงบเข้าไว้ในทุกชิ้นงาน",
-    "เราเกิดขึ้นเพื่อเปลี่ยนมุมมองต่อวัสดุและงานทอไทย ให้ก้าวออกจากภาพจำของความดั้งเดิมหรือของที่ระลึก สู่การเป็นส่วนหนึ่งของชีวิตร่วมสมัยที่ผู้คนใช้ได้จริง ภูมิใจได้ และสัมผัสได้ถึงความหรูอย่างสงบในทุกวัน",
-    "ทุกใบผ่านมือช่างทอไทยที่สืบทอดฝีมือจากรุ่นสู่รุ่น ก่อนถูกยกระดับด้วยโครงสร้างและดีไซน์ที่ตอบโจทย์จังหวะชีวิตในเมือง",
+    "SARNSARENE ก่อตั้งขึ้นบนความหลงใหลในขุมทรัพย์วัตถุดิบและภูมิปัญญาไทย มุ่งมั่นที่จะเปลี่ยนผ่านวัฒนธรรมอันทรงคุณค่า ให้กลายเป็นสัมผัสแห่งความสงบและความยั่งยืนภายในกายและใจ",
+    "เรื่องราวเริ่มต้นจากความทรงจำอันงดงามของการมองเห็นเส้นใยธรรมชาติถูกถักทอทีละเส้นบนกี่ทอผ้าโบราณ ควบคู่ไปกับกลิ่นหอมอ่อนๆ ของธรรมชาติที่ลอยมาตามลม ช่วงเวลาแห่งความสมดุลนี้ได้จุดประกายความหลงใหลในพลังของการเยียวยา ผ่านสัมผัสที่ละเมียดละไม กลิ่นหอมอันเงียบสงบ และจังหวะที่เรียบง่ายของงานฝีมือแบบ Slow Craftsmanship",
+    "ในโลกที่เร่งรีบและเต็มไปด้วยความวุ่นวาย SARNSARENE จึงถูกสร้างขึ้นเพื่อให้ทุกคนได้กลับมารับรู้ถึงความสงบ คืนความสมดุลให้กับกาย จิตใจ และพื้นที่รอบตัว ผ่านความหรูหราที่เรียบง่ายและเหนือกาลเวลา",
   ],
   image: "/images/story.jpg",
+  bannerImage: "/images/story-banner.jpg",
 };
 
 export const easternInspiration = {
-  eyebrow: "Rooted in Thai Craft",
-  title: "Contemporary Thai Weaving",
+  eyebrow: "บริสุทธิ์ เรียบง่าย และจริงใจต่อการใช้งานจริง",
+  title: "Natural Integrity",
   sections: [
-    { title: "The Art of Thai Weaving", description: "จากกี่ทอโบราณสู่ผืนผ้าที่แข็งแรงและงดงาม เราคัดสรรวัสดุและงานทอไทยที่มีคุณภาพ เพื่อนำมาออกแบบใหม่ให้เข้ากับจังหวะชีวิตสมัยใหม่", image: "/images/eastern-1.jpg", reverse: false },
-    { title: "Detail in Every Stitch", description: "ตะขอทองเหลืองรูปหยดน้ำ อักษร SARNSARENE ที่สลักอย่างประณีต และหูหิ้วที่ขึ้นรูปด้วยมือ คือรายละเอียดที่บอกเล่าความใส่ใจในทุกขั้นตอน", image: "/images/eastern-2.jpg", reverse: true },
+    { title: " Thai Botanical & Textile Wealth", description: "คัดสรรและรวบรวมวัตถุดิบธรรมชาติ รวมถึงสิ่งทออันทรงคุณค่าจากทั่วทุกภูมิภาคของไทย นำมาเป็นหัวใจหลักในการรังสรรค์ เพื่อส่งมอบสัมผัสและกลิ่นไออันเป็นเอกลักษณ์ของท้องถิ่นอย่างแท้จริง", image: "/images/eastern-1.jpg", reverse: false },
+    { title: " Thoughtful Blend for Everyday Comfort", description: "นำเสน่ห์ของสิ่งทอไทยมาผสมผสานและพัฒนาโครงสร้างเส้นใยให้เข้ากับชีวิตยุคใหม่ เพื่อเพิ่มความทนทาน ดูแลรักษาง่าย เบาสบาย และตอบโจทย์การใช้งานในชีวิตประจำวันได้อย่างลงตัวที่สุด", image: "/images/eastern-2.jpg", reverse: true },
   ],
 };
 
@@ -137,9 +135,6 @@ export const newsletter = {
 export const footer = {
   tagline: "งานทอไทยร่วมสมัย หรูอย่างสงบ\nBangkok, Thailand",
   columns: [
-    { title: "Explore", items: ["The Signature Tote", "Colorways", "Care Guide", "Journal"] },
-    { title: "About", items: ["Our Philosophy", "Our Roots", "Sustainability", "Journal"] },
-    { title: "Support", items: ["Contact Us", "Shipping & Returns", "FAQs", "Care Guide"] },
     { title: "Follow Us", items: ["Instagram", "Facebook", "Pinterest", "TikTok"] },
   ],
   copyright: "© 2026 SARNSARENE. All rights reserved.",

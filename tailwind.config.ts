@@ -9,13 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#2B2B2B",
-        "bg-secondary": "#343434",
-        beige: "#BC9A7A",
-        gold: "#CDA364",
-        brown: "#8C6F52",
-        "text-light": "#FEF5E1",
-        "text-muted": "#BBAA95",
+        bg: "rgb(var(--color-bg) / <alpha-value>)",
+        "bg-secondary": "rgb(var(--color-bg-secondary) / <alpha-value>)",
+        beige: "rgb(var(--color-beige) / <alpha-value>)",
+        gold: "rgb(var(--color-gold) / <alpha-value>)",
+        "text-light": "rgb(var(--color-text-light) / <alpha-value>)",
+        // Secondary text per brand spec: Charcoal at a fixed 65% opacity,
+        // not an independent hue — so this ignores /NN opacity modifiers.
+        "text-muted": "rgb(var(--color-text-light) / 0.65)",
       },
       fontFamily: {
         serif: ["var(--font-cormorant)", "var(--font-thai)", "Georgia", "serif"],

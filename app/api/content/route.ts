@@ -28,8 +28,6 @@ export const nav = {
   links: [
     { label: ${j(d.nav.links[0].label)}, href: ${j(d.nav.links[0].href)} },
     { label: ${j(d.nav.links[1].label)}, href: ${j(d.nav.links[1].href)} },
-    { label: ${j(d.nav.links[2].label)}, href: ${j(d.nav.links[2].href)} },
-    { label: ${j(d.nav.links[3].label)}, href: ${j(d.nav.links[3].href)} },
   ],
 };
 
@@ -46,22 +44,23 @@ export const philosophy = {
   eyebrow: ${j(d.philosophy.eyebrow)},
   title: ${j(d.philosophy.title)},
   items: [
-    { icon: "circle" as const, title: ${j(d.philosophy.items[0].title)}, description: ${j(d.philosophy.items[0].description)} },
-    { icon: "weave" as const, title: ${j(d.philosophy.items[1].title)}, description: ${j(d.philosophy.items[1].description)} },
-    { icon: "drop" as const, title: ${j(d.philosophy.items[2].title)}, description: ${j(d.philosophy.items[2].description)} },
-    { icon: "leaf" as const, title: ${j(d.philosophy.items[3].title)}, description: ${j(d.philosophy.items[3].description)} },
+    { icon: "weave" as const, title: ${j(d.philosophy.items[0].title)}, description: ${j(d.philosophy.items[0].description)} },
+    { icon: "drop" as const, title: ${j(d.philosophy.items[1].title)}, description: ${j(d.philosophy.items[1].description)} },
   ],
 };
 
 export const ourStory = {
   eyebrow: ${j(d.ourStory.eyebrow)},
   title: ${j(d.ourStory.title)},
+  rootHeading: ${j(d.ourStory.rootHeading)},
+  bannerSubtitle: ${j(d.ourStory.bannerSubtitle)},
   paragraphs: [
     ${j(d.ourStory.paragraphs[0])},
     ${j(d.ourStory.paragraphs[1])},
     ${j(d.ourStory.paragraphs[2])},
   ],
   image: ${j(d.ourStory.image)},
+  bannerImage: ${j(d.ourStory.bannerImage)},
 };
 
 export const easternInspiration = {
@@ -147,9 +146,6 @@ export const footer = {
   tagline: ${j(d.footer.tagline)},
   columns: [
     { title: ${j(d.footer.columns[0].title)}, items: [${j(d.footer.columns[0].items[0])}, ${j(d.footer.columns[0].items[1])}, ${j(d.footer.columns[0].items[2])}, ${j(d.footer.columns[0].items[3])}] },
-    { title: ${j(d.footer.columns[1].title)}, items: [${j(d.footer.columns[1].items[0])}, ${j(d.footer.columns[1].items[1])}, ${j(d.footer.columns[1].items[2])}, ${j(d.footer.columns[1].items[3])}] },
-    { title: ${j(d.footer.columns[2].title)}, items: [${j(d.footer.columns[2].items[0])}, ${j(d.footer.columns[2].items[1])}, ${j(d.footer.columns[2].items[2])}, ${j(d.footer.columns[2].items[3])}] },
-    { title: ${j(d.footer.columns[3].title)}, items: [${j(d.footer.columns[3].items[0])}, ${j(d.footer.columns[3].items[1])}, ${j(d.footer.columns[3].items[2])}, ${j(d.footer.columns[3].items[3])}] },
   ],
   copyright: ${j(d.footer.copyright)},
   legal: ${j(d.footer.legal)},

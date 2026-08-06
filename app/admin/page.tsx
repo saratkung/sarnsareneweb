@@ -1,5 +1,6 @@
 import AdminEditor from "@/components/AdminEditor";
 import * as content from "@/lib/content";
+import { theme } from "@/lib/theme";
 
 export default function AdminPage() {
   const {
@@ -40,5 +41,5 @@ export default function AdminPage() {
     footer,
   };
 
-  return <AdminEditor initialData={initialData} />;
+  return <AdminEditor initialData={initialData} initialTheme={theme} />;
 }

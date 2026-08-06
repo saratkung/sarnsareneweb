@@ -1,8 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { journeyForward } from "@/lib/content";
+import { en } from "@/lib/translations";
+import { useLanguage } from "@/components/LanguageContext";
 import { Reveal } from "@/components/Reveal";
 
 export default function JourneyForward() {
+  const { lang } = useLanguage();
+  const description = lang === "en" ? en.journeyForward.description : journeyForward.description;
+
   return (
     <section className="relative py-40 md:py-56 overflow-hidden">
       <div className="absolute inset-0">
@@ -12,7 +19,7 @@ export default function JourneyForward() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-bg/80" />
+        <div className="absolute inset-0 bg-bg" style={{ opacity: "var(--journey-overlay-opacity)" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/60" />
       </div>
 
@@ -27,7 +34,7 @@ export default function JourneyForward() {
         </Reveal>
         <Reveal delay={0.2}>
           <p className="text-text-muted text-[15px] leading-[1.9] font-light">
-            {journeyForward.description}
+            {description}
           </p>
         </Reveal>
       </div>

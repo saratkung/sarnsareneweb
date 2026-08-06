@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import type { Theme, SectionKey } from "@/lib/theme";
 
 // ------------------------------------------------------------------
 // Config: every editable text field and image slot on the landing
@@ -21,11 +22,15 @@ type SectionConfig = {
 
 const SECTIONS: SectionConfig[] = [
   {
-    id: "announcement", n: "01", th: "แถบประกาศ", en: "Announcement Bar",
+    id: "nav", n: "01", th: "แถบเมนูบนสุด", en: "Nav Bar",
+    fields: [],
+  },
+  {
+    id: "announcement", n: "02", th: "แถบประกาศ", en: "Announcement Bar",
     fields: [{ path: "announcement.message", label: "ข้อความประกาศ", type: "textarea" }],
   },
   {
-    id: "hero", n: "02", th: "ภาพหลักหน้าแรก", en: "Hero", defaultOpen: true,
+    id: "hero", n: "03", th: "ภาพหลักหน้าแรก", en: "Hero", defaultOpen: true,
     images: [{ slot: "hero", fileName: "hero.jpg" }],
     fields: [
       { path: "hero.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
@@ -36,33 +41,34 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "philosophy", n: "03", th: "ปรัชญาแบรนด์", en: "Philosophy",
+    id: "philosophy", n: "04", th: "ปรัชญาแบรนด์", en: "Philosophy",
     fields: [
       { path: "philosophy.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
       { path: "philosophy.title", label: "หัวข้อ" },
-      { path: "philosophy.items.0.title", label: "การ์ด 1 — หัวข้อ" },
-      { path: "philosophy.items.0.description", label: "การ์ด 1 — คำอธิบาย", type: "textarea" },
-      { path: "philosophy.items.1.title", label: "การ์ด 2 — หัวข้อ" },
-      { path: "philosophy.items.1.description", label: "การ์ด 2 — คำอธิบาย", type: "textarea" },
-      { path: "philosophy.items.2.title", label: "การ์ด 3 — หัวข้อ" },
-      { path: "philosophy.items.2.description", label: "การ์ด 3 — คำอธิบาย", type: "textarea" },
-      { path: "philosophy.items.3.title", label: "การ์ด 4 — หัวข้อ" },
-      { path: "philosophy.items.3.description", label: "การ์ด 4 — คำอธิบาย", type: "textarea" },
+      { path: "philosophy.items.0.title", label: "คำที่ 1 — หัวข้อ" },
+      { path: "philosophy.items.0.description", label: "คำที่ 1 — คำอธิบาย", type: "textarea" },
+      { path: "philosophy.items.1.title", label: "คำที่ 2 — หัวข้อ" },
+      { path: "philosophy.items.1.description", label: "คำที่ 2 — คำอธิบาย", type: "textarea" },
     ],
   },
   {
-    id: "ourStory", n: "04", th: "เรื่องราวแบรนด์", en: "Our Story", defaultOpen: true,
-    images: [{ slot: "story", fileName: "story.jpg" }],
+    id: "ourStory", n: "05", th: "เรื่องราวแบรนด์", en: "Our Story", defaultOpen: true,
+    images: [
+      { slot: "story", fileName: "story.jpg" },
+      { slot: "story-banner", fileName: "story-banner.jpg" },
+    ],
     fields: [
       { path: "ourStory.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
-      { path: "ourStory.title", label: "หัวข้อ" },
+      { path: "ourStory.title", label: "หัวข้อในแบนเนอร์" },
+      { path: "ourStory.rootHeading", label: "หัวข้อเล็กฝั่งซ้าย (Our Roots)" },
+      { path: "ourStory.bannerSubtitle", label: "คำโปรยในแบนเนอร์", type: "textarea" },
       { path: "ourStory.paragraphs.0", label: "ย่อหน้า 1", type: "textarea" },
       { path: "ourStory.paragraphs.1", label: "ย่อหน้า 2", type: "textarea" },
       { path: "ourStory.paragraphs.2", label: "ย่อหน้า 3", type: "textarea" },
     ],
   },
   {
-    id: "eastern", n: "05", th: "แรงบันดาลใจตะวันออก", en: "Eastern Inspiration", defaultOpen: true,
+    id: "eastern", n: "06", th: "แรงบันดาลใจตะวันออก", en: "Eastern Inspiration", defaultOpen: true,
     images: [
       { slot: "eastern-1", fileName: "eastern-1.jpg" },
       { slot: "eastern-2", fileName: "eastern-2.jpg" },
@@ -77,7 +83,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "signature", n: "06", th: "ประสบการณ์ซิกเนเจอร์", en: "Signature Experience",
+    id: "signature", n: "07", th: "ประสบการณ์ซิกเนเจอร์", en: "Signature Experience",
     fields: [
       { path: "signatureExperience.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
       { path: "signatureExperience.title", label: "หัวข้อ" },
@@ -90,14 +96,14 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "quote", n: "07", th: "คำคมไฮไลต์", en: "Highlight Quote",
+    id: "quote", n: "08", th: "คำคมไฮไลต์", en: "Highlight Quote",
     fields: [
       { path: "highlightQuote.quote", label: "คำคม", type: "textarea" },
       { path: "highlightQuote.attribution", label: "ชื่อผู้กล่าว" },
     ],
   },
   {
-    id: "manifesto", n: "08", th: "แถลงการณ์แบรนด์", en: "Brand Manifesto",
+    id: "manifesto", n: "09", th: "แถลงการณ์แบรนด์", en: "Brand Manifesto",
     fields: [
       { path: "brandManifesto.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
       { path: "brandManifesto.title", label: "หัวข้อ" },
@@ -107,7 +113,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "collection", n: "09", th: "คอลเลกชันสินค้า", en: "Featured Collection", defaultOpen: true,
+    id: "collection", n: "10", th: "คอลเลกชันสินค้า", en: "Featured Collection", defaultOpen: true,
     images: [
       { slot: "product-1", fileName: "product-1.jpg" },
       { slot: "product-2", fileName: "product-2.jpg" },
@@ -137,7 +143,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "journey", n: "10", th: "ก้าวต่อไป", en: "Journey Forward",
+    id: "journey", n: "11", th: "ก้าวต่อไป", en: "Journey Forward",
     images: [{ slot: "journey", fileName: "journey.jpg" }],
     fields: [
       { path: "journeyForward.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
@@ -146,7 +152,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "services", n: "11", th: "บริการเสริมฟรี", en: "Complimentary Services",
+    id: "services", n: "12", th: "บริการเสริมฟรี", en: "Complimentary Services",
     fields: [
       { path: "complimentaryServices.items.0.label", label: "ไอคอน 1 — ข้อความ" },
       { path: "complimentaryServices.items.1.label", label: "ไอคอน 2 — ข้อความ" },
@@ -155,7 +161,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "sustainability", n: "12", th: "ความยั่งยืน", en: "Sustainability",
+    id: "sustainability", n: "13", th: "ความยั่งยืน", en: "Sustainability",
     images: [{ slot: "sustainability", fileName: "sustainability.jpg" }],
     fields: [
       { path: "sustainability.eyebrow", label: "ข้อความเล็กเหนือหัวข้อ" },
@@ -169,7 +175,7 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "newsletter", n: "13", th: "สมัครรับข่าวสาร", en: "Newsletter",
+    id: "newsletter", n: "14", th: "สมัครรับข่าวสาร", en: "Newsletter",
     fields: [
       { path: "newsletter.title", label: "หัวข้อ" },
       { path: "newsletter.subtitle", label: "คำโปรย", type: "textarea" },
@@ -178,33 +184,26 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "footer", n: "14", th: "ท้ายเว็บ", en: "Footer",
+    id: "footer", n: "15", th: "ท้ายเว็บ", en: "Footer",
     fields: [
       { path: "footer.tagline", label: "แท็กไลน์ (ขึ้นบรรทัดใหม่ได้)", type: "textarea" },
-      { path: "footer.columns.0.title", label: "คอลัมน์ 1 — หัวข้อ" },
-      { path: "footer.columns.0.items.0", label: "คอลัมน์ 1 — ลิงก์ 1" },
-      { path: "footer.columns.0.items.1", label: "คอลัมน์ 1 — ลิงก์ 2" },
-      { path: "footer.columns.0.items.2", label: "คอลัมน์ 1 — ลิงก์ 3" },
-      { path: "footer.columns.0.items.3", label: "คอลัมน์ 1 — ลิงก์ 4" },
-      { path: "footer.columns.1.title", label: "คอลัมน์ 2 — หัวข้อ" },
-      { path: "footer.columns.1.items.0", label: "คอลัมน์ 2 — ลิงก์ 1" },
-      { path: "footer.columns.1.items.1", label: "คอลัมน์ 2 — ลิงก์ 2" },
-      { path: "footer.columns.1.items.2", label: "คอลัมน์ 2 — ลิงก์ 3" },
-      { path: "footer.columns.1.items.3", label: "คอลัมน์ 2 — ลิงก์ 4" },
-      { path: "footer.columns.2.title", label: "คอลัมน์ 3 — หัวข้อ" },
-      { path: "footer.columns.2.items.0", label: "คอลัมน์ 3 — ลิงก์ 1" },
-      { path: "footer.columns.2.items.1", label: "คอลัมน์ 3 — ลิงก์ 2" },
-      { path: "footer.columns.2.items.2", label: "คอลัมน์ 3 — ลิงก์ 3" },
-      { path: "footer.columns.2.items.3", label: "คอลัมน์ 3 — ลิงก์ 4" },
-      { path: "footer.columns.3.title", label: "คอลัมน์ 4 — หัวข้อ" },
-      { path: "footer.columns.3.items.0", label: "คอลัมน์ 4 — ลิงก์ 1" },
-      { path: "footer.columns.3.items.1", label: "คอลัมน์ 4 — ลิงก์ 2" },
-      { path: "footer.columns.3.items.2", label: "คอลัมน์ 4 — ลิงก์ 3" },
-      { path: "footer.columns.3.items.3", label: "คอลัมน์ 4 — ลิงก์ 4" },
+      { path: "footer.columns.0.title", label: "หัวข้อคอลัมน์ (Follow Us)" },
+      { path: "footer.columns.0.items.0", label: "ลิงก์ 1" },
+      { path: "footer.columns.0.items.1", label: "ลิงก์ 2" },
+      { path: "footer.columns.0.items.2", label: "ลิงก์ 3" },
+      { path: "footer.columns.0.items.3", label: "ลิงก์ 4" },
       { path: "footer.copyright", label: "ข้อความลิขสิทธิ์" },
       { path: "footer.legal", label: "ข้อความกฎหมาย" },
     ],
   },
+];
+
+const THEME_COLOR_FIELDS: { key: keyof Theme["colors"]; label: string }[] = [
+  { key: "bg", label: "พื้นหลังหลัก (Ivory)" },
+  { key: "bgSecondary", label: "พื้นหลังรอง (Warm Sand เจือจาง)" },
+  { key: "beige", label: "Warm Sand" },
+  { key: "gold", label: "Champagne Gold" },
+  { key: "textLight", label: "ตัวอักษร/Charcoal" },
 ];
 
 // ------------------------------------------------------------------
@@ -231,9 +230,16 @@ function setPathImmutable(obj: any, pathStr: string, value: unknown) {
 
 type ImageEdit = { file: File; previewUrl: string };
 
-export default function AdminEditor({ initialData }: { initialData: any }) {
+export default function AdminEditor({
+  initialData,
+  initialTheme,
+}: {
+  initialData: any;
+  initialTheme: Theme;
+}) {
   const [data, setData] = useState(initialData);
   const [images, setImages] = useState<Record<string, ImageEdit>>({});
+  const [themeData, setThemeData] = useState<Theme>(initialTheme);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -243,6 +249,24 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
     setData((prev: any) => setPathImmutable(prev, path, value));
   }, []);
 
+  const setThemeColor = useCallback((key: keyof Theme["colors"], value: string) => {
+    setThemeData((prev) => ({ ...prev, colors: { ...prev.colors, [key]: value } }));
+  }, []);
+
+  const setThemeNumber = useCallback((key: "heroOverlayOpacity" | "journeyOverlayOpacity" | "imageBrightness", value: number) => {
+    setThemeData((prev) => ({ ...prev, [key]: value }));
+  }, []);
+
+  const setSectionOverride = useCallback(
+    (key: SectionKey, patch: Partial<Theme["sections"][SectionKey]>) => {
+      setThemeData((prev) => ({
+        ...prev,
+        sections: { ...prev.sections, [key]: { ...prev.sections[key], ...patch } },
+      }));
+    },
+    []
+  );
+
   const dirtyFieldCount = SECTIONS.reduce((count, section) => {
     return (
       count +
@@ -250,7 +274,8 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
     );
   }, 0);
   const dirtyImageCount = Object.keys(images).length;
-  const hasChanges = dirtyFieldCount > 0 || dirtyImageCount > 0;
+  const themeDirty = JSON.stringify(themeData) !== JSON.stringify(initialTheme);
+  const hasChanges = dirtyFieldCount > 0 || dirtyImageCount > 0 || themeDirty;
 
   function handleFile(slot: string, file: File | undefined | null) {
     if (!file || !file.type.startsWith("image/")) return;
@@ -269,6 +294,15 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
         body: JSON.stringify(data),
       });
       if (!contentRes.ok) throw new Error((await contentRes.json()).error ?? "บันทึกข้อความไม่สำเร็จ");
+
+      if (themeDirty) {
+        const themeRes = await fetch("/api/theme", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(themeData),
+        });
+        if (!themeRes.ok) throw new Error((await themeRes.json()).error ?? "บันทึกธีมไม่สำเร็จ");
+      }
 
       for (const [slot, edit] of Object.entries(images)) {
         const form = new FormData();
@@ -292,6 +326,7 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
     if (!confirm("ล้างการแก้ไขทั้งหมดที่ยังไม่ได้บันทึกหรือไม่?")) return;
     setData(initialData);
     setImages({});
+    setThemeData(initialTheme);
     setError("");
     setStatus("");
   }
@@ -307,7 +342,7 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-bg bg-gold px-3.5 py-2 rounded-lg hover:brightness-110"
+            className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-text-light bg-gold px-3.5 py-2 rounded-lg hover:brightness-110"
           >
             เปิดเว็บในแท็บใหม่ ↗
           </a>
@@ -322,6 +357,64 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
       </header>
 
       <div className="max-w-[900px] mx-auto px-5 flex flex-col gap-3">
+        <details open className="bg-bg-secondary border border-beige/10 rounded-xl overflow-hidden">
+          <summary className="list-none cursor-pointer select-none px-4 py-3.5 flex items-center gap-3 [&::-webkit-details-marker]:hidden">
+            <span className="w-7 h-7 rounded-full bg-bg border border-beige/20 flex items-center justify-center font-mono text-[10.5px] text-text-muted flex-shrink-0">
+              00
+            </span>
+            <span className="font-serif text-[16px] font-semibold text-text-light">ธีมและโทนสี</span>
+            <span className="font-mono text-[10.5px] text-text-muted">Theme &amp; Color Tone</span>
+            <span className="ml-auto text-text-muted text-[11px] transition-transform details-chevron">▾</span>
+          </summary>
+
+          <div className="px-4 pb-5 pt-1 flex flex-col gap-6">
+            <div>
+              <p className="text-text-muted text-[12px] mb-3">สีหลักของเว็บ — เปลี่ยนตรงนี้แล้วสีจะเปลี่ยนทั้งเว็บทันที</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                {THEME_COLOR_FIELDS.map((f) => (
+                  <ColorField
+                    key={f.key}
+                    label={f.label}
+                    value={themeData.colors[f.key]}
+                    isDirty={themeData.colors[f.key] !== initialTheme.colors[f.key]}
+                    onChange={(v) => setThemeColor(f.key, v)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <RangeField
+                label="ความเข้มโทนภาพ Hero"
+                value={themeData.heroOverlayOpacity}
+                min={0}
+                max={1}
+                step={0.05}
+                isDirty={themeData.heroOverlayOpacity !== initialTheme.heroOverlayOpacity}
+                onChange={(v) => setThemeNumber("heroOverlayOpacity", v)}
+              />
+              <RangeField
+                label="ความเข้มโทนภาพ Journey Forward"
+                value={themeData.journeyOverlayOpacity}
+                min={0}
+                max={1}
+                step={0.05}
+                isDirty={themeData.journeyOverlayOpacity !== initialTheme.journeyOverlayOpacity}
+                onChange={(v) => setThemeNumber("journeyOverlayOpacity", v)}
+              />
+              <RangeField
+                label="ความสว่างรูปภาพทั้งเว็บ"
+                value={themeData.imageBrightness}
+                min={0.7}
+                max={1.3}
+                step={0.05}
+                isDirty={themeData.imageBrightness !== initialTheme.imageBrightness}
+                onChange={(v) => setThemeNumber("imageBrightness", v)}
+              />
+            </div>
+          </div>
+        </details>
+
         {SECTIONS.map((section) => (
           <details
             key={section.id}
@@ -359,6 +452,12 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
                   <Field key={f.path} field={f} data={data} initialData={initialData} onChange={setField} />
                 ))}
               </div>
+
+              <SectionThemeOverride
+                value={themeData.sections[section.id as SectionKey]}
+                initialValue={initialTheme.sections[section.id as SectionKey]}
+                onChange={(patch) => setSectionOverride(section.id as SectionKey, patch)}
+              />
             </div>
           </details>
         ))}
@@ -375,6 +474,12 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
               <>
                 แก้ข้อความแล้ว <b className="text-text-light">{dirtyFieldCount}</b> ช่อง · รูปใหม่{" "}
                 <b className="text-text-light">{dirtyImageCount}</b> รูป
+                {themeDirty && (
+                  <>
+                    {" "}
+                    · <b className="text-text-light">ธีม</b> เปลี่ยนแล้ว
+                  </>
+                )}
               </>
             ) : (
               "ยังไม่มีการแก้ไข"
@@ -400,7 +505,7 @@ export default function AdminEditor({ initialData }: { initialData: any }) {
             type="button"
             onClick={handleSave}
             disabled={saving || !hasChanges}
-            className="text-[13.5px] font-semibold px-5 py-2.5 rounded-lg bg-gold text-bg disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
+            className="text-[13.5px] font-semibold px-5 py-2.5 rounded-lg bg-gold text-text-light disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
           >
             {saving ? "กำลังบันทึก..." : "บันทึกลงเว็บ"}
           </button>
@@ -518,5 +623,104 @@ function ImageSlot({
       </div>
       <code className={`text-[11px] ${edited ? "text-gold" : "text-text-muted"}`}>{config.fileName}</code>
     </div>
+  );
+}
+
+function SectionThemeOverride({
+  value,
+  initialValue,
+  onChange,
+}: {
+  value: Theme["sections"][SectionKey];
+  initialValue: Theme["sections"][SectionKey];
+  onChange: (patch: Partial<Theme["sections"][SectionKey]>) => void;
+}) {
+  const isDirty = JSON.stringify(value) !== JSON.stringify(initialValue);
+
+  return (
+    <div className={`rounded-lg border px-3.5 py-3 ${isDirty ? "border-gold/60 bg-gold/5" : "border-beige/10"}`}>
+      <span className="text-[12px] text-text-muted">สีของหมวดนี้ — เปลี่ยนแล้วมีผลทันที ไม่ต้องเปิดสวิตช์อะไรก่อน</span>
+      <div className="grid grid-cols-3 gap-2.5 mt-2.5">
+        <ColorField label="พื้นหลัง" value={value.bg} isDirty={value.bg !== initialValue.bg} onChange={(v) => onChange({ bg: v })} />
+        <ColorField
+          label="ตัวอักษร/หัวข้อ"
+          value={value.textLight}
+          isDirty={value.textLight !== initialValue.textLight}
+          onChange={(v) => onChange({ textLight: v })}
+        />
+        <ColorField label="สีเน้น" value={value.gold} isDirty={value.gold !== initialValue.gold} onChange={(v) => onChange({ gold: v })} />
+      </div>
+    </div>
+  );
+}
+
+function ColorField({
+  label,
+  value,
+  isDirty,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  isDirty: boolean;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-2.5 rounded-md border px-2.5 py-2 ${
+        isDirty ? "border-gold/60 bg-gold/5" : "border-beige/15"
+      }`}
+    >
+      <input
+        type="color"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-8 h-8 rounded-md border border-beige/20 bg-transparent cursor-pointer shrink-0"
+      />
+      <div className="flex flex-col gap-0.5 min-w-0">
+        <span className="text-[11px] text-text-muted truncate">{label}</span>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="font-mono text-[12px] text-text-light bg-transparent outline-none w-[70px]"
+        />
+      </div>
+    </div>
+  );
+}
+
+function RangeField({
+  label,
+  value,
+  min,
+  max,
+  step,
+  isDirty,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  isDirty: boolean;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5 text-[13px]">
+      <span className={`text-[12px] flex items-center gap-1.5 ${isDirty ? "text-gold" : "text-text-muted"}`}>
+        {label} <span className="font-mono text-[11px]">{value.toFixed(2)}</span>
+      </span>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="accent-gold"
+      />
+    </label>
   );
 }

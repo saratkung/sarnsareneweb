@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { easternInspiration } from "@/lib/content";
+import { en } from "@/lib/translations";
+import { useLanguage } from "@/components/LanguageContext";
 import { Reveal } from "@/components/Reveal";
 
 export default function EasternInspiration() {
+  const { lang } = useLanguage();
+
   return (
-    <section className="bg-bg-secondary py-24 md:py-32">
+    <section className="bg-bg py-24 md:py-32">
       <div className="max-w-content mx-auto px-6 md:px-10">
         <Reveal className="text-center max-w-xl mx-auto mb-16 md:mb-20">
           <p className="eyebrow mb-4">{easternInspiration.eyebrow}</p>
@@ -14,7 +20,7 @@ export default function EasternInspiration() {
         </Reveal>
 
         <div className="flex flex-col gap-20 md:gap-28">
-          {easternInspiration.sections.map((sec) => (
+          {easternInspiration.sections.map((sec, i) => (
             <div
               key={sec.title}
               className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
@@ -39,7 +45,7 @@ export default function EasternInspiration() {
                   {sec.title}
                 </h3>
                 <p className="text-text-muted text-[14px] leading-[1.9] font-light max-w-md">
-                  {sec.description}
+                  {lang === "en" ? en.easternInspiration.sections[i]?.description ?? sec.description : sec.description}
                 </p>
               </Reveal>
             </div>

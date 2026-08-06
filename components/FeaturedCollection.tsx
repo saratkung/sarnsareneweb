@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { featuredCollection } from "@/lib/content";
+import { en } from "@/lib/translations";
+import { useLanguage } from "@/components/LanguageContext";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
 
 export default function FeaturedCollection() {
+  const { lang } = useLanguage();
+
   return (
-    <section id="collection" className="bg-bg-secondary py-24 md:py-32">
+    <section id="collection" className="bg-bg py-24 md:py-32">
       <div className="max-w-content mx-auto px-6 md:px-10">
         <Reveal className="flex items-end justify-between gap-6 mb-16 md:mb-20">
           <div>
@@ -15,16 +21,16 @@ export default function FeaturedCollection() {
           </div>
           <a
             href="#"
-            className="hidden sm:inline-block text-[10px] tracking-widest2 uppercase text-text-light border-b border-text-light/40 pb-1 whitespace-nowrap hover:border-gold hover:text-gold transition-colors duration-300"
+            className="hidden sm:inline-flex items-center px-6 py-2.5 text-[10px] tracking-widest2 uppercase text-text-light border border-gold/50 rounded-full whitespace-nowrap hover:bg-gold hover:text-[#2B2B2B] hover:border-gold hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 transition-all duration-300"
           >
             {featuredCollection.viewAll}
           </a>
         </Reveal>
 
         <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredCollection.products.map((product) => (
+          {featuredCollection.products.map((product, i) => (
             <StaggerItem key={product.name} className="group">
-              <div className="relative aspect-[3/4] overflow-hidden mb-5 bg-bg">
+              <div className="relative aspect-[3/4] overflow-hidden mb-5 bg-bg rounded-lg shadow-lg shadow-black/25">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -36,10 +42,10 @@ export default function FeaturedCollection() {
                 {product.name}
               </h3>
               <p className="text-text-muted text-[12.5px] leading-relaxed font-light mb-3">
-                {product.description}
+                {lang === "en" ? en.featuredCollection.products[i]?.description ?? product.description : product.description}
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-[10px] tracking-widest2 uppercase text-gold">
+                <span className="text-[10px] tracking-widest2 uppercase text-text-muted">
                   {product.detail}
                 </span>
                 <a

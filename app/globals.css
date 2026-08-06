@@ -6,9 +6,8 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: #2b2b2b;
-  color: #fef5e1;
+img {
+  filter: brightness(var(--image-brightness, 1));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -26,8 +25,8 @@ body {
 }
 
 ::selection {
-  background: #cda364;
-  color: #2b2b2b;
+  background: rgb(var(--color-gold));
+  color: rgb(var(--color-text-light));
 }
 
 .eyebrow {
@@ -35,10 +34,10 @@ body {
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #cda364;
+  color: rgb(var(--color-text-light) / 0.65);
 }
 
 .hairline {
   height: 1px;
-  background: rgba(254, 245, 225, 0.14);
+  background: rgb(var(--color-text-light) / 0.08);
 }

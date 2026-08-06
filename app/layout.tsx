@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { brand } from "@/lib/content";
+import { theme, hexToRgbTriplet } from "@/lib/theme";
+import { LanguageProvider } from "@/components/LanguageContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -39,13 +41,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cssVars = {
+    "--color-bg": hexToRgbTriplet(theme.colors.bg),
+    "--color-bg-secondary": hexToRgbTriplet(theme.colors.bgSecondary),
+    "--color-beige": hexToRgbTriplet(theme.colors.beige),
+    "--color-gold": hexToRgbTriplet(theme.colors.gold),
+    "--color-text-light": hexToRgbTriplet(theme.colors.textLight),
+    "--hero-overlay-opacity": theme.heroOverlayOpacity,
+    "--journey-overlay-opacity": theme.journeyOverlayOpacity,
+    "--image-brightness": theme.imageBrightness,
+  } as React.CSSProperties;
+
   return (
     <html
       lang="th"
       className={`${cormorant.variable} ${inter.variable} ${sukhumvitSet.variable}`}
     >
-      <body className="font-sans bg-bg text-text-light antialiased" suppressHydrationWarning>
-        {children}
+      <body
+        className="font-sans bg-bg text-text-light antialiased"
+        style={cssVars}
+        suppressHydrationWarning
+      >
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
