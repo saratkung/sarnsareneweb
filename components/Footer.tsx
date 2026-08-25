@@ -12,6 +12,11 @@ const socialMonograms: Record<string, string> = {
   TikTok: "TT",
 };
 
+const socialLinks: Record<string, string> = {
+  Instagram: "https://www.instagram.com/sarnsarene.official/",
+  Facebook: "https://www.facebook.com/profile.php?id=61592800792558",
+};
+
 export default function Footer() {
   const { lang } = useLanguage();
   const tagline = lang === "en" ? en.footer.tagline : footer.tagline;
@@ -60,7 +65,9 @@ export default function Footer() {
                 {followColumn.items.map((item) => (
                   <li key={item}>
                     <a
-                      href="#"
+                      href={socialLinks[item] ?? "#"}
+                      target={socialLinks[item] ? "_blank" : undefined}
+                      rel={socialLinks[item] ? "noopener noreferrer" : undefined}
                       aria-label={item}
                       title={item}
                       className="flex items-center justify-center w-8 h-8 rounded-full border border-text-light/8 text-[9px] tracking-wide text-text-muted hover:border-gold hover:text-gold transition-colors duration-300"
