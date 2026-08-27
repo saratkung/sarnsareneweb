@@ -92,6 +92,7 @@ export const en = {
 export const th = {
   nav: {
     contactUs: "ติดต่อเรา",
+    shop: "ร้านค้า",
     links: ["ความหมายของชื่อ", "ปรัชญาและเรื่องราวแบรนด์"],
   },
 };

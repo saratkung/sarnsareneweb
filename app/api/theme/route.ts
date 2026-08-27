@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
 import * as theme from "@/lib/theme";
+import { isAdmin } from "@/lib/commerce/admin/auth";
+import { crossOriginBlock } from "@/lib/security/request";
 
 function j(v: unknown) {
   return JSON.stringify(String(v ?? ""));
@@ -88,6 +90,11 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Admin editing is disabled in production." }, { status: 403 });
+  }
+  const blocked = crossOriginBlock(req);
+  if (blocked) return blocked;
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
   const data = await req.json();

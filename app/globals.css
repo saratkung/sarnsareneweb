@@ -41,3 +41,28 @@ img {
   height: 1px;
   background: rgb(var(--color-text-light) / 0.08);
 }
+
+/* ------------------------------------------------------------------
+   Section palettes. The landing page keeps the dark tokens set on
+   <body> by layout.tsx. The storefront and admin re-skin the same
+   CSS-variable token system by wrapping their subtrees in one of
+   these classes — and so do their portalled overlays (Modal /
+   Drawer / Toast), which render outside the layout subtree.
+   ------------------------------------------------------------------ */
+.palette-shop {
+  --color-bg: 250 246 239;
+  --color-bg-secondary: 242 236 226;
+  --color-beige: 188 154 122;
+  --color-gold: 154 123 79;
+  --color-text-light: 43 43 43;
+  --image-brightness: 1;
+}
+
+.palette-admin {
+  --color-bg: 251 250 248;
+  --color-bg-secondary: 244 242 238;
+  --color-beige: 188 154 122;
+  --color-gold: 140 115 75;
+  --color-text-light: 38 38 38;
+  --image-brightness: 1;
+}

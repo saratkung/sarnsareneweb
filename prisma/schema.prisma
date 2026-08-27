@@ -1,0 +1,268 @@
+// ============================================================
+// SARNSARENE — database schema (Phase 4).
+//
+// SQLite for development; switch `provider` to "postgresql" and
+// re-point DATABASE_URL for production — the app code is
+// provider-agnostic (all access goes through lib/db.ts + the
+// repository layer under lib/commerce/**).
+//
+// Enum-like columns (role, status, payment method…) are stored
+// as String and validated in the domain layer, because SQLite
+// has no native enum type.
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---- Identity ---------------------------------------------------------
+
+/// USERS — customers and admins share this table; `role` gates access.
+/// (An admin is simply a User with role = "ADMIN"; there is no separate
+/// ADMIN_USERS table — the distinction is the role column.)
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  phone        String?
+  passwordHash String?
+  role         String     @default("CUSTOMER") // CUSTOMER | ADMIN
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  addresses    Address[]
+  orders       Order[]
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+/// ADDRESSES — a customer's saved address book (§14).
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName   String
+  line1      String
+  district   String
+  province   String
+  postalCode String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ---- Catalog --------------------------------------------------------
+
+model Category {
+  slug String @id
+  name String
+}
+
+model Collection {
+  slug String @id
+  name String
+}
+
+model Product {
+  id               String           @id
+  slug             String           @unique
+  name             String
+  categorySlug     String
+  collectionSlug   String
+  status           String           @default("DRAFT") // ACTIVE | DRAFT | SOLD_OUT | ARCHIVED
+  price            Int
+  shortDescription String
+  story            Json // string[]
+  details          Json // { title: string, body: string[] }[]
+  featuredRank     Int?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  colors           ProductColor[]
+  sizes            ProductSize[]
+  variants         ProductVariant[]
+
+  @@index([categorySlug])
+  @@index([collectionSlug])
+}
+
+model ProductColor {
+  id        String           @id @default(cuid())
+  productId String
+  product   Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorKey  String // stable within a product, e.g. "onyx-black"
+  name      String
+  swatch    String
+  images    Json // string[]
+  position  Int              @default(0)
+  variants  ProductVariant[]
+
+  @@unique([productId, colorKey])
+}
+
+model ProductSize {
+  id        String           @id @default(cuid())
+  productId String
+  product   Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sizeKey   String // stable within a product, e.g. "regular"
+  name      String
+  note      String?
+  position  Int              @default(0)
+  variants  ProductVariant[]
+
+  @@unique([productId, sizeKey])
+}
+
+/// PRODUCT_VARIANTS + INVENTORY — one buyable (colour, size) unit with
+/// its own stock. Stock lives here so decrements are a single atomic
+/// UPDATE; InventoryLog keeps the movement history.
+model ProductVariant {
+  id            String         @id
+  productId     String
+  product       Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorId       String
+  color         ProductColor   @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  sizeId        String
+  size          ProductSize    @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+  sku           String
+  stock         Int            @default(0)
+  price         Int? // per-variant override; falls back to Product.price
+  inventoryLogs InventoryLog[]
+
+  @@index([productId])
+}
+
+model InventoryLog {
+  id        String         @id @default(cuid())
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  delta     Int
+  reason    String // "order_reserve" | "order_release" | "admin_adjust"
+  orderId   String?
+  at        DateTime       @default(now())
+
+  @@index([variantId])
+}
+
+// ---- Orders --------------------------------------------------------
+
+model Order {
+  id            String           @id // SR-YYMMDD-NNN
+  userId        String?
+  user          User?            @relation(fields: [userId], references: [id])
+  customerRef   String // browser cookie id (links guest orders to a user later)
+  email         String
+  phone         String
+  name          String
+  status        String           @default("PENDING_PAYMENT")
+  subtotal      Int
+  shippingTotal Int
+  total         Int
+  shipAddress   Json // snapshot { fullName, address, district, province, postalCode }
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  items         OrderItem[]
+  payment       Payment?
+  shipment      Shipment?
+  events        OrderEvent[]
+  idempotency   IdempotencyKey[]
+
+  @@index([customerRef])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// ORDER_ITEMS — a pure snapshot; no FK to Product/Variant so a
+/// product can be deleted without touching order history.
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  order       Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  productSlug String
+  productName String
+  variantId   String
+  colorName   String
+  sizeName    String
+  image       String
+  unitPrice   Int
+  quantity    Int
+  lineTotal   Int
+
+  @@index([orderId])
+}
+
+model Payment {
+  id           String    @id @default(cuid())
+  orderId      String    @unique
+  order        Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  method       String // promptpay | card | bank_transfer
+  status       String    @default("PENDING") // PENDING | PAID | FAILED | REFUNDED
+  reference    String    @default("")
+  instructions String?
+  amount       Int
+  paidAt       DateTime?
+  refundedAt   DateTime?
+}
+
+model Shipment {
+  id             String    @id @default(cuid())
+  orderId        String    @unique
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  method         String // standard | express
+  carrier        String?
+  trackingNumber String?
+  trackingUrl    String?
+  shippedAt      DateTime?
+  deliveredAt    DateTime?
+}
+
+model OrderEvent {
+  id      String   @id @default(cuid())
+  orderId String
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  at      DateTime @default(now())
+  status  String
+  note    String?
+  by      String // "system" | admin email
+
+  @@index([orderId])
+}
+
+/// Idempotency for order creation (§28) — a key maps to exactly one order.
+model IdempotencyKey {
+  key       String   @id
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+// ---- Audit --------------------------------------------------------
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  at         DateTime @default(now())
+  actor      String // admin email or "system"
+  action     String
+  targetType String // "order" | "product" | "inventory" | "auth"
+  targetId   String
+  summary    String
+
+  @@index([targetType, targetId])
+  @@index([at])
+}
