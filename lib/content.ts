@@ -18,6 +18,8 @@ export const nav = {
   links: [
     { label: "The meaning behind the name", href: "#philosophy" },
     { label: "Our Roots", href: "#story" },
+    // Opens the standalone brand-film page at /journey.
+    { label: "Our Journey", href: "/journey" },
   ],
 };
 
