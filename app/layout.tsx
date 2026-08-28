@@ -30,10 +30,23 @@ const sukhumvitSet = localFont({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const description =
+  "SARNSARENE is a contemporary Thai design brand elevating traditional weaving materials and craftsmanship into everyday, quietly luxurious accessories.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${brand.name} — หรูอย่างสงบ`,
-  description:
-    "SARNSARENE is a contemporary Thai design brand elevating traditional weaving materials and craftsmanship into everyday, quietly luxurious accessories.",
+  description,
+  applicationName: brand.name,
+  openGraph: {
+    type: "website",
+    siteName: brand.name,
+    title: `${brand.name} — Woven Serenity`,
+    description,
+    images: ["/images/hero.jpg"],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

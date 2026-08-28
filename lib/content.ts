@@ -35,7 +35,7 @@ export const philosophy = {
   title: "The meaning behind the name",
   items: [
     { icon: "weave" as const, title: "SARN", description: "รากจากภาษาไทย \"สาน\" สะท้อนศิลปะแห่งการเชื่อมโยงผู้คนและวัฒนธรรม ให้ก่อกำเนิดคุณค่าที่ยั่งยืน" },
-    { icon: "drop" as const, title: "SERENE", description: "รากจากภาษาละติน serēnus สะท้อนความสงบอันบริสุทธิ์ ความแจ่มใส และความมั่นคงจากภายใน" },
+    { icon: "drop" as const, title: "SARENE", description: "รากจากภาษาละติน serēnus สะท้อนความสงบอันบริสุทธิ์ ความแจ่มใส และความมั่นคงจากภายใน" },
   ],
 };
 

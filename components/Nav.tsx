@@ -10,6 +10,8 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, toggleLang } = useLanguage();
   const contactUs = lang === "th" ? th.nav.contactUs : "Contact Us";
+  // NOTE: the /shop nav link is temporarily hidden — restore the <Link href="/shop">
+  // in the left cluster and the hamburger menu when the storefront goes public.
 
   return (
     <header className="sticky top-0 z-50 w-full bg-bg border-b border-text-light/8 transition-colors duration-500">
