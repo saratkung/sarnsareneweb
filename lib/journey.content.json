@@ -1,0 +1,130 @@
+{
+  "_comment": "Editable content for /journey. Edit in the admin UI at /admin/journey (dev only) or by hand here, then commit + redeploy. lib/journey.ts loads this file; structural bits (section id / index / layout) and motion timing live in lib/journey.ts.",
+
+  "meta": {
+    "title": "The Journey — SARNSARENE",
+    "description": "A journey toward serenity — the story of SARNSARENE, told as a quiet fashion film.",
+    "brand": "SARNSARENE",
+    "sideLabel": "A JOURNEY TOWARD SERENITY",
+    "backLabel": { "th": "หน้าหลัก", "en": "HOME" },
+    "backHref": "/"
+  },
+
+  "hero": {
+    "image": "/images/journey/journey-hero.webp",
+    "lineTop": "THE JOURNEY",
+    "lineMid": "of",
+    "lineBottom": "SARNSARENE",
+    "scrollCue": { "th": "SCROLL TO BEGIN", "en": "SCROLL TO BEGIN" }
+  },
+
+  "menu": {
+    "label": { "th": "เมนู", "en": "MENU" },
+    "siteLinks": [
+      { "label": { "th": "กลับสู่หน้าหลัก", "en": "BACK TO HOME" }, "href": "/" },
+      { "label": { "th": "ชอป", "en": "SHOP" }, "href": "/shop" }
+    ]
+  },
+
+  "sections": [
+    { "id": "beginning",   "index": "01", "layout": "split",      "kicker": { "th": "THE BEGINNING",         "en": "THE BEGINNING" },         "bg": "#F2EDE3", "ink": "#2C261F", "accent": "#8C7B63" },
+    { "id": "inspiration", "index": "02", "layout": "full-bleed", "kicker": { "th": "THE INSPIRATION",       "en": "THE INSPIRATION" },       "bg": "#241F1B", "ink": "#EDE4D6", "accent": "#B79A6F" },
+    { "id": "philosophy",  "index": "03", "layout": "split",      "kicker": { "th": "THE PHILOSOPHY",        "en": "THE PHILOSOPHY" },        "bg": "#EFE9DD", "ink": "#2C261F", "accent": "#8C7B63" },
+    { "id": "making",      "index": "04", "layout": "full-bleed", "kicker": { "th": "THE MAKING",            "en": "THE MAKING" },            "bg": "#171310", "ink": "#E7DCCC", "accent": "#B79A6F" },
+    { "id": "collection",  "index": "05", "layout": "split",      "kicker": { "th": "THE FIRST COLLECTION",  "en": "THE FIRST COLLECTION" },  "bg": "#F1EBDF", "ink": "#2C261F", "accent": "#8C7B63" },
+    { "id": "continues",   "index": "06", "layout": "centered",   "kicker": { "th": "THE JOURNEY CONTINUES", "en": "THE JOURNEY CONTINUES" }, "bg": "#F5F0E6", "ink": "#2C261F", "accent": "#8C7B63" }
+  ],
+
+  "content": {
+    "beginning": {
+      "image": "/images/journey/beginning.webp",
+      "imageAlt": { "th": "ภูมิทัศน์ที่มีภูเขา หมอก และคนยืนอยู่เพียงลำพัง", "en": "A misty mountain landscape with a single figure" },
+      "heading": {
+        "th": "เมื่อชีวิตเคลื่อนเร็วขึ้น\nเราจึงเริ่มมองหาความสงบ",
+        "en": "As life moves faster,\nwe begin to look for stillness"
+      },
+      "body": {
+        "th": "การเดินทางของ SARNSARENE เริ่มต้นจากความเชื่อที่ว่า ความสงบและความสมดุลสามารถเยียวยาวิถีชีวิตที่เร่งรีบได้",
+        "en": "The journey of SARNSARENE began with a belief — that calm and balance can heal a life lived in a hurry."
+      }
+    },
+
+    "inspiration": {
+      "image": "/images/journey/inspiration.webp",
+      "imageAlt": { "th": "กี่ทอผ้าและงานทอมือแบบไทย", "en": "A traditional Thai loom and hand-weaving" },
+      "heading": {
+        "th": "แรงบันดาลใจจากเส้นใย\nงานฝีมือ และวัฒนธรรมไทย",
+        "en": "Drawn from thread,\ncraft, and Thai culture"
+      },
+      "body": {
+        "th": "ทุกลวดลาย ทุกเส้นสาย ล้วนซ่อนเรื่องราวของอดีต ภูมิปัญญา และความประณีตที่ส่งต่อจากรุ่นสู่รุ่น",
+        "en": "Every pattern, every line holds a story — of the past, of wisdom, of a care passed down through generations."
+      }
+    },
+
+    "philosophy": {
+      "image": "/images/journey/philosophy.webp",
+      "imageAlt": { "th": "ผ้าสีครีมพลิ้วไหว", "en": "Flowing cream-coloured fabric" },
+      "heading": { "th": "HARMONIOUS\nHEALING", "en": "HARMONIOUS\nHEALING" },
+      "body": {
+        "th": "การเยียวยาวิถีชีวิตที่เร่งรีบ ด้วยความสมดุล ความเรียบง่าย และความเงียบสงบ",
+        "en": "Healing a hurried life through balance, simplicity, and quiet."
+      },
+      "pillars": [
+        { "icon": "harmony", "label": { "th": "HARMONY", "en": "HARMONY" } },
+        { "icon": "balance", "label": { "th": "BALANCE", "en": "BALANCE" } },
+        { "icon": "serenity", "label": { "th": "SERENITY", "en": "SERENITY" } }
+      ]
+    },
+
+    "making": {
+      "image": "/images/journey/making.webp",
+      "imageAlt": { "th": "มือช่างฝีมือกำลังประกอบกระเป๋า", "en": "An artisan's hands shaping a bag" },
+      "heading": {
+        "th": "จากความตั้งใจ\nสู่ทุกขั้นตอนที่ประณีต",
+        "en": "From intention\nto every considered step"
+      },
+      "body": {
+        "th": "ใส่ใจในทุกรายละเอียด คัดสรรวัสดุคุณภาพ และสร้างสรรค์อย่างพิถีพิถันเพื่อให้แต่ละชิ้นมีความหมาย",
+        "en": "Attentive to every detail, chosen materials, made with care — so each piece carries meaning."
+      },
+      "steps": [
+        { "label": { "th": "SELECT\nMATERIALS", "en": "SELECT\nMATERIALS" } },
+        { "label": { "th": "HANDCRAFTED\nWITH CARE", "en": "HANDCRAFTED\nWITH CARE" } },
+        { "label": { "th": "TIME &\nPRECISION", "en": "TIME &\nPRECISION" } },
+        { "label": { "th": "SHAPED\nWITH PURPOSE", "en": "SHAPED\nWITH PURPOSE" } },
+        { "label": { "th": "FINISHED\nBEAUTIFULLY", "en": "FINISHED\nBEAUTIFULLY" } }
+      ]
+    },
+
+    "collection": {
+      "image": "/images/journey/collection.webp",
+      "imageAlt": { "th": "กระเป๋า SARNSARENE คอลเลกชันแรก", "en": "The first SARNSARENE collection" },
+      "heading": {
+        "th": "คอลเลกชันแรก\nที่เกิดจากความตั้งใจทั้งหมด",
+        "en": "The first collection,\nborn of every intention"
+      },
+      "body": {
+        "th": "ทุกชิ้นคือผลลัพธ์ของการเดินทาง ที่ผสานความประณีตเข้ากับความหมาย",
+        "en": "Each piece is the result of the journey — craft woven together with meaning."
+      },
+      "palette": [
+        { "label": { "th": "Ivory", "en": "Ivory" }, "swatch": "#EFE7D8" },
+        { "label": { "th": "Sand", "en": "Sand" }, "swatch": "#D8C6A9" },
+        { "label": { "th": "Warm Beige", "en": "Warm Beige" }, "swatch": "#C2A882" },
+        { "label": { "th": "Brown", "en": "Brown" }, "swatch": "#6E5844" }
+      ],
+      "cta": { "label": { "th": "EXPLORE COLLECTION", "en": "EXPLORE COLLECTION" }, "href": "/shop" }
+    },
+
+    "continues": {
+      "heading": {
+        "th": "เราเชื่อว่าการเดินทางนี้\nจะยังคงพาเราและคุณไปสู่ความสงบ...\nด้วยกัน",
+        "en": "We believe this journey\nwill keep leading us, and you,\ntoward serenity — together"
+      },
+      "wordmark": "SARNSARENE",
+      "tagline": { "th": "A QUIETER WAY OF LIVING", "en": "A QUIETER WAY OF LIVING" },
+      "cta": { "label": { "th": "CONTINUE EXPLORING", "en": "CONTINUE EXPLORING" }, "href": "/" }
+    }
+  }
+}
