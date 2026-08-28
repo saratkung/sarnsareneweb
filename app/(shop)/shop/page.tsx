@@ -19,10 +19,12 @@ export const metadata = {
 export const revalidate = 60;
 
 export default async function ShopPage() {
+  // Tolerate a not-yet-reachable DB during the first deploy / prerender —
+  // the page revalidates once the catalog is seeded.
   const [products, colors, sizes] = await Promise.all([
-    allProducts(),
-    allColors(),
-    allSizes(),
+    allProducts().catch(() => []),
+    allColors().catch(() => []),
+    allSizes().catch(() => []),
   ]);
 
   return (

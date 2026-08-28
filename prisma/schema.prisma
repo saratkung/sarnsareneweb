@@ -1,14 +1,14 @@
 // ============================================================
-// SARNSARENE — database schema (Phase 4).
+// SARNSARENE — database schema.
 //
-// SQLite for development; switch `provider` to "postgresql" and
-// re-point DATABASE_URL for production — the app code is
-// provider-agnostic (all access goes through lib/db.ts + the
-// repository layer under lib/commerce/**).
+// PostgreSQL (Neon / Vercel Postgres / Supabase / local).
+//   DATABASE_URL  — pooled connection, used by the app at runtime
+//   DIRECT_URL    — direct connection, used by `prisma migrate`
+// (Neon and Vercel Postgres provide both; for a plain Postgres,
+// point both at the same URL.)
 //
-// Enum-like columns (role, status, payment method…) are stored
-// as String and validated in the domain layer, because SQLite
-// has no native enum type.
+// Enum-like columns (role, status, payment method…) are stored as
+// String and validated in the domain layer.
 // ============================================================
 
 generator client {
@@ -16,8 +16,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ---- Identity ---------------------------------------------------------
