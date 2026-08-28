@@ -27,6 +27,9 @@ export const journeyMeta = {
   brand: "SARNSARENE",
   // Small rotated text pinned to the left edge on desktop.
   sideLabel: "A JOURNEY TOWARD SERENITY",
+  // "← back to the main site" control, top-left next to the wordmark.
+  backLabel: { th: "หน้าหลัก", en: "HOME" },
+  backHref: "/",
 };
 
 export const journeyHero = {
