@@ -1,31 +1,48 @@
 {
   "_comment": "Editable content for /journey. Edit in the admin UI at /admin/journey (dev only) or by hand here, then commit + redeploy. lib/journey.ts loads this file; structural bits (section id / index / layout) and motion timing live in lib/journey.ts. Multi-paragraph body text: separate paragraphs with a blank line. Line breaks inside a heading / the closing lines: a single newline.",
-
   "meta": {
     "title": "The Journey — SARNSARENE",
     "description": "We did not begin by wanting to make another bag — we began by listening. The story of SARNSARENE.",
     "brand": "SARNSARENE",
     "sideLabel": "A JOURNEY TOWARD SERENITY",
-    "backLabel": { "th": "หน้าหลัก", "en": "HOME" },
+    "backLabel": {
+      "th": "หน้าหลัก",
+      "en": "HOME"
+    },
     "backHref": "/"
   },
-
   "hero": {
     "image": "/images/journey/journey-hero.webp",
     "lineTop": "THE JOURNEY",
     "lineMid": "of",
     "lineBottom": "SARNSARENE",
-    "scrollCue": { "th": "SCROLL TO BEGIN", "en": "SCROLL TO BEGIN" }
+    "scrollCue": {
+      "th": "SCROLL TO BEGIN",
+      "en": "SCROLL TO BEGIN"
+    }
   },
-
   "menu": {
-    "label": { "th": "เมนู", "en": "MENU" },
+    "label": {
+      "th": "เมนู",
+      "en": "MENU"
+    },
     "siteLinks": [
-      { "label": { "th": "กลับสู่หน้าหลัก", "en": "BACK TO HOME" }, "href": "/" },
-      { "label": { "th": "ชอป", "en": "SHOP" }, "href": "/shop" }
+      {
+        "label": {
+          "th": "กลับสู่หน้าหลัก",
+          "en": "BACK TO HOME"
+        },
+        "href": "/"
+      },
+      {
+        "label": {
+          "th": "ชอป",
+          "en": "SHOP"
+        },
+        "href": "/shop"
+      }
     ]
   },
-
   "intro": {
     "bg": "#F5F0E6",
     "ink": "#2C261F",
@@ -35,18 +52,63 @@
       "en": "We did not begin with the wish to make another bag. We began by listening.\n\nIn conversations with people, we found that many still see the worth of Thai craft — it has only lacked a bridge out of the image of the traditional and the souvenir, into contemporary life: something genuinely useful, something to be proud of, something that stays with you every day."
     }
   },
-
   "sections": [
-    { "id": "listening",  "index": "01", "layout": "split",      "kicker": { "th": "LISTENING",                  "en": "LISTENING" },                  "bg": "#F2EDE3", "ink": "#2C261F", "accent": "#8C7B63" },
-    { "id": "source",     "index": "02", "layout": "full-bleed", "kicker": { "th": "RETURNING TO THE SOURCE",    "en": "RETURNING TO THE SOURCE" },    "bg": "#241F1B", "ink": "#EDE4D6", "accent": "#B79A6F" },
-    { "id": "voice",      "index": "03", "layout": "split",      "kicker": { "th": "FINDING A SHARED VOICE",     "en": "FINDING A SHARED VOICE" },     "bg": "#EFE9DD", "ink": "#2C261F", "accent": "#8C7B63" },
-    { "id": "firstpiece", "index": "04", "layout": "full-bleed", "kicker": { "th": "THE FIRST PIECE BEGINS ITS JOURNEY", "en": "THE FIRST PIECE BEGINS ITS JOURNEY" }, "bg": "#171310", "ink": "#E7DCCC", "accent": "#B79A6F" }
+    {
+      "id": "listening",
+      "index": "01",
+      "layout": "split",
+      "kicker": {
+        "th": "LISTENING",
+        "en": "LISTENING"
+      },
+      "bg": "#F2EDE3",
+      "ink": "#2C261F",
+      "accent": "#8C7B63"
+    },
+    {
+      "id": "source",
+      "index": "02",
+      "layout": "full-bleed",
+      "kicker": {
+        "th": "RETURNING TO THE SOURCE",
+        "en": "RETURNING TO THE SOURCE"
+      },
+      "bg": "#241F1B",
+      "ink": "#EDE4D6",
+      "accent": "#B79A6F"
+    },
+    {
+      "id": "voice",
+      "index": "03",
+      "layout": "split",
+      "kicker": {
+        "th": "FINDING A SHARED VOICE",
+        "en": "FINDING A SHARED VOICE"
+      },
+      "bg": "#EFE9DD",
+      "ink": "#2C261F",
+      "accent": "#8C7B63"
+    },
+    {
+      "id": "firstpiece",
+      "index": "04",
+      "layout": "full-bleed",
+      "kicker": {
+        "th": "THE FIRST PIECE BEGINS ITS JOURNEY",
+        "en": "THE FIRST PIECE BEGINS ITS JOURNEY"
+      },
+      "bg": "#171310",
+      "ink": "#E7DCCC",
+      "accent": "#B79A6F"
+    }
   ],
-
   "content": {
     "listening": {
       "image": "/images/journey/listening.webp",
-      "imageAlt": { "th": "บทสนทนากับผู้คน", "en": "In conversation with people" },
+      "imageAlt": {
+        "th": "บทสนทนากับผู้คน",
+        "en": "In conversation with people"
+      },
       "heading": {
         "th": "จุดเริ่มต้นจากเสียงของผู้คน",
         "en": "It began with the voices of people"
@@ -56,10 +118,12 @@
         "en": "Those voices led us to a question — how do we keep the value of Thai craftsmanship while making it answer the way we live today?\n\nThat question became the beginning of SARNSARENE, and set us searching for new possibilities in material, weave, and design."
       }
     },
-
     "source": {
       "image": "/images/journey/source.webp",
-      "imageAlt": { "th": "แหล่งวัตถุดิบ ผู้ผลิตเส้นใย และช่างฝีมือ", "en": "Raw materials, fibre makers, and artisans" },
+      "imageAlt": {
+        "th": "แหล่งวัตถุดิบ ผู้ผลิตเส้นใย และช่างฝีมือ",
+        "en": "Raw materials, fibre makers, and artisans"
+      },
       "heading": {
         "th": "กลับไปหาต้นทาง",
         "en": "Returning to the source"
@@ -69,10 +133,12 @@
         "en": "We travelled to the raw materials, the fibre makers, and the artisans — to learn from the very beginning. Not only to find a maker, but to understand the character of each fibre, the wisdom behind the weave, and the limits we could work on together.\n\nFrom those meetings came experiments, reworked fabric structures, and a search for ways to give Thai weaving beauty, strength, and a true fitness for everyday use."
       }
     },
-
     "voice": {
       "image": "/images/journey/voice.webp",
-      "imageAlt": { "th": "ผู้ที่สะท้อนคุณค่าของแบรนด์", "en": "People who reflect the brand's values" },
+      "imageAlt": {
+        "th": "ผู้ที่สะท้อนคุณค่าของแบรนด์",
+        "en": "People who reflect the brand's values"
+      },
       "heading": {
         "th": "เมื่อคุณค่าของแบรนด์เริ่มมีผู้ร่วมสะท้อน",
         "en": "When the brand's values found others who shared them"
@@ -82,10 +148,12 @@
         "en": "As the picture of SARNSARENE grew clearer, we met people who reflected its values — calm, craftsmanship, and a confidence that never needs to raise its voice.\n\nThat connection led to a meaningful opportunity, when our first prototype — still in the midst of learning and refinement — travelled into the hands of the Ambassador."
       }
     },
-
     "firstpiece": {
       "image": "/images/journey/firstpiece.webp",
-      "imageAlt": { "th": "ต้นแบบผลิตภัณฑ์ชิ้นแรก", "en": "The first prototype" },
+      "imageAlt": {
+        "th": "ต้นแบบผลิตภัณฑ์ชิ้นแรก",
+        "en": "The first prototype"
+      },
       "heading": {
         "th": "การเดินทางครั้งแรกของชิ้นงาน",
         "en": "The first piece begins its journey"
@@ -96,7 +164,6 @@
       }
     }
   },
-
   "closing": {
     "bg": "#F5F0E6",
     "ink": "#2C261F",
@@ -110,7 +177,16 @@
       "en": "Every step has shown us that SARNSARENE is not here only to make things — it is weaving a relationship between people, craft, culture, and time, so that Thai work lives in the present and can keep travelling into the future."
     },
     "wordmark": "SARNSARENE",
-    "tagline": { "th": "A QUIETER WAY OF LIVING", "en": "A QUIETER WAY OF LIVING" },
-    "cta": { "label": { "th": "CONTINUE EXPLORING", "en": "CONTINUE EXPLORING" }, "href": "/" }
+    "tagline": {
+      "th": "A QUIETER WAY OF LIVING",
+      "en": "A QUIETER WAY OF LIVING"
+    },
+    "cta": {
+      "label": {
+        "th": "CONTINUE EXPLORING",
+        "en": "CONTINUE EXPLORING"
+      },
+      "href": "/"
+    }
   }
 }
