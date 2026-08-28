@@ -1,9 +1,9 @@
 {
-  "_comment": "Editable content for /journey. Edit in the admin UI at /admin/journey (dev only) or by hand here, then commit + redeploy. lib/journey.ts loads this file; structural bits (section id / index / layout) and motion timing live in lib/journey.ts.",
+  "_comment": "Editable content for /journey. Edit in the admin UI at /admin/journey (dev only) or by hand here, then commit + redeploy. lib/journey.ts loads this file; structural bits (section id / index / layout) and motion timing live in lib/journey.ts. Multi-paragraph body text: separate paragraphs with a blank line. Line breaks inside a heading / the closing lines: a single newline.",
 
   "meta": {
     "title": "The Journey — SARNSARENE",
-    "description": "A journey toward serenity — the story of SARNSARENE, told as a quiet fashion film.",
+    "description": "We did not begin by wanting to make another bag — we began by listening. The story of SARNSARENE.",
     "brand": "SARNSARENE",
     "sideLabel": "A JOURNEY TOWARD SERENITY",
     "backLabel": { "th": "หน้าหลัก", "en": "HOME" },
@@ -26,105 +26,91 @@
     ]
   },
 
+  "intro": {
+    "bg": "#F5F0E6",
+    "ink": "#2C261F",
+    "accent": "#8C7B63",
+    "body": {
+      "th": "เราไม่ได้เริ่มต้นจากความต้องการสร้างกระเป๋าอีกหนึ่งใบ แต่เริ่มต้นจากการรับฟัง\n\nจากบทสนทนากับผู้คน เราพบว่าหลายคนยังคงมองเห็นคุณค่าของงานไทย เพียงแต่งานเหล่านั้นยังขาดสะพานที่จะพาออกจากภาพจำของความดั้งเดิมและของที่ระลึก เข้ามาเป็นส่วนหนึ่งของชีวิตร่วมสมัย—สิ่งที่สามารถใช้ได้จริง ภูมิใจได้ และอยู่กับผู้ใช้ได้ในทุกวัน",
+      "en": "We did not begin with the wish to make another bag. We began by listening.\n\nIn conversations with people, we found that many still see the worth of Thai craft — it has only lacked a bridge out of the image of the traditional and the souvenir, into contemporary life: something genuinely useful, something to be proud of, something that stays with you every day."
+    }
+  },
+
   "sections": [
-    { "id": "beginning",   "index": "01", "layout": "split",      "kicker": { "th": "THE BEGINNING",         "en": "THE BEGINNING" },         "bg": "#F2EDE3", "ink": "#2C261F", "accent": "#8C7B63" },
-    { "id": "inspiration", "index": "02", "layout": "full-bleed", "kicker": { "th": "THE INSPIRATION",       "en": "THE INSPIRATION" },       "bg": "#241F1B", "ink": "#EDE4D6", "accent": "#B79A6F" },
-    { "id": "philosophy",  "index": "03", "layout": "split",      "kicker": { "th": "THE PHILOSOPHY",        "en": "THE PHILOSOPHY" },        "bg": "#EFE9DD", "ink": "#2C261F", "accent": "#8C7B63" },
-    { "id": "making",      "index": "04", "layout": "full-bleed", "kicker": { "th": "THE MAKING",            "en": "THE MAKING" },            "bg": "#171310", "ink": "#E7DCCC", "accent": "#B79A6F" },
-    { "id": "collection",  "index": "05", "layout": "split",      "kicker": { "th": "THE FIRST COLLECTION",  "en": "THE FIRST COLLECTION" },  "bg": "#F1EBDF", "ink": "#2C261F", "accent": "#8C7B63" },
-    { "id": "continues",   "index": "06", "layout": "centered",   "kicker": { "th": "THE JOURNEY CONTINUES", "en": "THE JOURNEY CONTINUES" }, "bg": "#F5F0E6", "ink": "#2C261F", "accent": "#8C7B63" }
+    { "id": "listening",  "index": "01", "layout": "split",      "kicker": { "th": "LISTENING",                  "en": "LISTENING" },                  "bg": "#F2EDE3", "ink": "#2C261F", "accent": "#8C7B63" },
+    { "id": "source",     "index": "02", "layout": "full-bleed", "kicker": { "th": "RETURNING TO THE SOURCE",    "en": "RETURNING TO THE SOURCE" },    "bg": "#241F1B", "ink": "#EDE4D6", "accent": "#B79A6F" },
+    { "id": "voice",      "index": "03", "layout": "split",      "kicker": { "th": "FINDING A SHARED VOICE",     "en": "FINDING A SHARED VOICE" },     "bg": "#EFE9DD", "ink": "#2C261F", "accent": "#8C7B63" },
+    { "id": "firstpiece", "index": "04", "layout": "full-bleed", "kicker": { "th": "THE FIRST PIECE BEGINS ITS JOURNEY", "en": "THE FIRST PIECE BEGINS ITS JOURNEY" }, "bg": "#171310", "ink": "#E7DCCC", "accent": "#B79A6F" }
   ],
 
   "content": {
-    "beginning": {
-      "image": "/images/journey/beginning.webp",
-      "imageAlt": { "th": "ภูมิทัศน์ที่มีภูเขา หมอก และคนยืนอยู่เพียงลำพัง", "en": "A misty mountain landscape with a single figure" },
+    "listening": {
+      "image": "/images/journey/listening.webp",
+      "imageAlt": { "th": "บทสนทนากับผู้คน", "en": "In conversation with people" },
       "heading": {
-        "th": "เมื่อชีวิตเคลื่อนเร็วขึ้น\nเราจึงเริ่มมองหาความสงบ",
-        "en": "As life moves faster,\nwe begin to look for stillness"
+        "th": "จุดเริ่มต้นจากเสียงของผู้คน",
+        "en": "It began with the voices of people"
       },
       "body": {
-        "th": "การเดินทางของ SARNSARENE เริ่มต้นจากความเชื่อที่ว่า ความสงบและความสมดุลสามารถเยียวยาวิถีชีวิตที่เร่งรีบได้",
-        "en": "The journey of SARNSARENE began with a belief — that calm and balance can heal a life lived in a hurry."
+        "th": "เสียงเหล่านั้นทำให้เราเริ่มตั้งคำถามว่า เราจะรักษาคุณค่าของงานฝีมือไทยไว้ พร้อมกับทำให้มันตอบรับวิถีชีวิตในปัจจุบันได้อย่างไร\n\nคำถามนี้กลายเป็นจุดเริ่มต้นของ SARNSARENE และนำเราไปสู่การค้นหาความเป็นไปได้ใหม่ของวัสดุ งานทอ และการออกแบบ",
+        "en": "Those voices led us to a question — how do we keep the value of Thai craftsmanship while making it answer the way we live today?\n\nThat question became the beginning of SARNSARENE, and set us searching for new possibilities in material, weave, and design."
       }
     },
 
-    "inspiration": {
-      "image": "/images/journey/inspiration.webp",
-      "imageAlt": { "th": "กี่ทอผ้าและงานทอมือแบบไทย", "en": "A traditional Thai loom and hand-weaving" },
+    "source": {
+      "image": "/images/journey/source.webp",
+      "imageAlt": { "th": "แหล่งวัตถุดิบ ผู้ผลิตเส้นใย และช่างฝีมือ", "en": "Raw materials, fibre makers, and artisans" },
       "heading": {
-        "th": "แรงบันดาลใจจากเส้นใย\nงานฝีมือ และวัฒนธรรมไทย",
-        "en": "Drawn from thread,\ncraft, and Thai culture"
+        "th": "กลับไปหาต้นทาง",
+        "en": "Returning to the source"
       },
       "body": {
-        "th": "ทุกลวดลาย ทุกเส้นสาย ล้วนซ่อนเรื่องราวของอดีต ภูมิปัญญา และความประณีตที่ส่งต่อจากรุ่นสู่รุ่น",
-        "en": "Every pattern, every line holds a story — of the past, of wisdom, of a care passed down through generations."
+        "th": "เราเดินทางไปพบแหล่งวัตถุดิบ ผู้ผลิตเส้นใย และช่างฝีมือ เพื่อเรียนรู้ตั้งแต่ต้นทาง ไม่ใช่เพียงเพื่อหาผู้ผลิต แต่เพื่อทำความเข้าใจคุณสมบัติของแต่ละเส้นใย ภูมิปัญญาที่อยู่เบื้องหลังงานทอ และข้อจำกัดที่เราสามารถร่วมกันพัฒนาให้ดีขึ้นได้\n\nจากการพบปะเหล่านั้น เริ่มเกิดการทดลอง การปรับโครงสร้างผ้า และการค้นหาวิธีทำให้งานทอไทยมีทั้งความงาม ความแข็งแรง และความเหมาะสมกับการใช้งานจริง",
+        "en": "We travelled to the raw materials, the fibre makers, and the artisans — to learn from the very beginning. Not only to find a maker, but to understand the character of each fibre, the wisdom behind the weave, and the limits we could work on together.\n\nFrom those meetings came experiments, reworked fabric structures, and a search for ways to give Thai weaving beauty, strength, and a true fitness for everyday use."
       }
     },
 
-    "philosophy": {
-      "image": "/images/journey/philosophy.webp",
-      "imageAlt": { "th": "ผ้าสีครีมพลิ้วไหว", "en": "Flowing cream-coloured fabric" },
-      "heading": { "th": "HARMONIOUS\nHEALING", "en": "HARMONIOUS\nHEALING" },
-      "body": {
-        "th": "การเยียวยาวิถีชีวิตที่เร่งรีบ ด้วยความสมดุล ความเรียบง่าย และความเงียบสงบ",
-        "en": "Healing a hurried life through balance, simplicity, and quiet."
-      },
-      "pillars": [
-        { "icon": "harmony", "label": { "th": "HARMONY", "en": "HARMONY" } },
-        { "icon": "balance", "label": { "th": "BALANCE", "en": "BALANCE" } },
-        { "icon": "serenity", "label": { "th": "SERENITY", "en": "SERENITY" } }
-      ]
-    },
-
-    "making": {
-      "image": "/images/journey/making.webp",
-      "imageAlt": { "th": "มือช่างฝีมือกำลังประกอบกระเป๋า", "en": "An artisan's hands shaping a bag" },
+    "voice": {
+      "image": "/images/journey/voice.webp",
+      "imageAlt": { "th": "ผู้ที่สะท้อนคุณค่าของแบรนด์", "en": "People who reflect the brand's values" },
       "heading": {
-        "th": "จากความตั้งใจ\nสู่ทุกขั้นตอนที่ประณีต",
-        "en": "From intention\nto every considered step"
+        "th": "เมื่อคุณค่าของแบรนด์เริ่มมีผู้ร่วมสะท้อน",
+        "en": "When the brand's values found others who shared them"
       },
       "body": {
-        "th": "ใส่ใจในทุกรายละเอียด คัดสรรวัสดุคุณภาพ และสร้างสรรค์อย่างพิถีพิถันเพื่อให้แต่ละชิ้นมีความหมาย",
-        "en": "Attentive to every detail, chosen materials, made with care — so each piece carries meaning."
-      },
-      "steps": [
-        { "label": { "th": "SELECT\nMATERIALS", "en": "SELECT\nMATERIALS" } },
-        { "label": { "th": "HANDCRAFTED\nWITH CARE", "en": "HANDCRAFTED\nWITH CARE" } },
-        { "label": { "th": "TIME &\nPRECISION", "en": "TIME &\nPRECISION" } },
-        { "label": { "th": "SHAPED\nWITH PURPOSE", "en": "SHAPED\nWITH PURPOSE" } },
-        { "label": { "th": "FINISHED\nBEAUTIFULLY", "en": "FINISHED\nBEAUTIFULLY" } }
-      ]
+        "th": "เมื่อภาพของ SARNSARENE ค่อย ๆ ชัดเจนขึ้น เราได้พบกับบุคคลที่สะท้อนคุณค่าของแบรนด์—ความสงบ ความประณีต และความมั่นใจที่ไม่จำเป็นต้องส่งเสียงดัง\n\nความสัมพันธ์ครั้งนั้นนำไปสู่โอกาสสำคัญ เมื่อต้นแบบผลิตภัณฑ์ชิ้นแรกของเรา ซึ่งยังอยู่ระหว่างการเรียนรู้และพัฒนา ได้ออกเดินทางไปถึงมือของท่านทูต",
+        "en": "As the picture of SARNSARENE grew clearer, we met people who reflected its values — calm, craftsmanship, and a confidence that never needs to raise its voice.\n\nThat connection led to a meaningful opportunity, when our first prototype — still in the midst of learning and refinement — travelled into the hands of the Ambassador."
+      }
     },
 
-    "collection": {
-      "image": "/images/journey/collection.webp",
-      "imageAlt": { "th": "กระเป๋า SARNSARENE คอลเลกชันแรก", "en": "The first SARNSARENE collection" },
+    "firstpiece": {
+      "image": "/images/journey/firstpiece.webp",
+      "imageAlt": { "th": "ต้นแบบผลิตภัณฑ์ชิ้นแรก", "en": "The first prototype" },
       "heading": {
-        "th": "คอลเลกชันแรก\nที่เกิดจากความตั้งใจทั้งหมด",
-        "en": "The first collection,\nborn of every intention"
+        "th": "การเดินทางครั้งแรกของชิ้นงาน",
+        "en": "The first piece begins its journey"
       },
       "body": {
-        "th": "ทุกชิ้นคือผลลัพธ์ของการเดินทาง ที่ผสานความประณีตเข้ากับความหมาย",
-        "en": "Each piece is the result of the journey — craft woven together with meaning."
-      },
-      "palette": [
-        { "label": { "th": "Ivory", "en": "Ivory" }, "swatch": "#EFE7D8" },
-        { "label": { "th": "Sand", "en": "Sand" }, "swatch": "#D8C6A9" },
-        { "label": { "th": "Warm Beige", "en": "Warm Beige" }, "swatch": "#C2A882" },
-        { "label": { "th": "Brown", "en": "Brown" }, "swatch": "#6E5844" }
-      ],
-      "cta": { "label": { "th": "EXPLORE COLLECTION", "en": "EXPLORE COLLECTION" }, "href": "/shop" }
-    },
-
-    "continues": {
-      "heading": {
-        "th": "เราเชื่อว่าการเดินทางนี้\nจะยังคงพาเราและคุณไปสู่ความสงบ...\nด้วยกัน",
-        "en": "We believe this journey\nwill keep leading us, and you,\ntoward serenity — together"
-      },
-      "wordmark": "SARNSARENE",
-      "tagline": { "th": "A QUIETER WAY OF LIVING", "en": "A QUIETER WAY OF LIVING" },
-      "cta": { "label": { "th": "CONTINUE EXPLORING", "en": "CONTINUE EXPLORING" }, "href": "/" }
+        "th": "ชิ้นงานนั้นอาจยังไม่ใช่คำตอบที่สมบูรณ์ แต่เป็นหลักฐานของก้าวแรก—ก้าวที่ทำให้เราเห็นว่างานฝีมือไทยสามารถเดินทางออกจากชุมชน ไปสู่พื้นที่ร่วมสมัย และสร้างบทสนทนากับผู้คนจากต่างวัฒนธรรมได้",
+        "en": "That piece may not be a complete answer, but it is proof of a first step — one that showed us Thai craftsmanship can travel out of the community, into contemporary spaces, and open a conversation with people from other cultures."
+      }
     }
+  },
+
+  "closing": {
+    "bg": "#F5F0E6",
+    "ink": "#2C261F",
+    "accent": "#8C7B63",
+    "lines": {
+      "th": "จากเสียงของลูกค้า สู่มือของช่าง\nจากเส้นใย สู่ผืนผ้า\nและจากต้นแบบ สู่การเดินทางครั้งแรก",
+      "en": "From the voices of customers, to the hands of artisans.\nFrom fibre, to cloth.\nAnd from prototype, to a first journey."
+    },
+    "body": {
+      "th": "ทุกก้าวทำให้เราเข้าใจว่า SARNSARENE ไม่ได้มีหน้าที่เพียงสร้างสิ่งของ แต่กำลังสานความสัมพันธ์ระหว่างผู้คน งานฝีมือ วัฒนธรรม และเวลา เพื่อให้งานไทยมีชีวิตอยู่ในปัจจุบัน และสามารถเดินทางต่อไปสู่อนาคต",
+      "en": "Every step has shown us that SARNSARENE is not here only to make things — it is weaving a relationship between people, craft, culture, and time, so that Thai work lives in the present and can keep travelling into the future."
+    },
+    "wordmark": "SARNSARENE",
+    "tagline": { "th": "A QUIETER WAY OF LIVING", "en": "A QUIETER WAY OF LIVING" },
+    "cta": { "label": { "th": "CONTINUE EXPLORING", "en": "CONTINUE EXPLORING" }, "href": "/" }
   }
 }

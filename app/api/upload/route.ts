@@ -24,11 +24,10 @@ const SLOT_TO_FILENAME: Record<string, string> = {
   sustainability: "sustainability.jpg",
   // /journey page imagery (kept under public/images/journey/).
   "journey-hero": "journey/journey-hero.webp",
-  "journey-beginning": "journey/beginning.webp",
-  "journey-inspiration": "journey/inspiration.webp",
-  "journey-philosophy": "journey/philosophy.webp",
-  "journey-making": "journey/making.webp",
-  "journey-collection": "journey/collection.webp",
+  "journey-listening": "journey/listening.webp",
+  "journey-source": "journey/source.webp",
+  "journey-voice": "journey/voice.webp",
+  "journey-firstpiece": "journey/firstpiece.webp",
 };
 
 export async function POST(req: NextRequest) {

@@ -11,6 +11,7 @@
 //   • journeyMotion                     — animation timing / easing
 //
 //   { th, en }  — Thai shows by default; English on the EN toggle.
+//   body text   — split paragraphs with a blank line.
 //   image       — files in /public; replace the file at the same
 //                 path (keep the aspect ratio) to swap a photo.
 // ============================================================
@@ -21,47 +22,26 @@ type Bilingual = { th: string; en: string };
 
 export type JourneySection = {
   id: string;
-  index: string; // "01" … "06"
-  layout: "split" | "full-bleed" | "centered";
+  index: string; // "01" … "04"
+  layout: "split" | "full-bleed";
   kicker: Bilingual;
   bg: string; // section background
   ink: string; // text colour
   accent: string; // hairline / number / underline
 };
 
-type PillarIcon = "harmony" | "balance" | "serenity";
+type Chapter = {
+  image: string;
+  imageAlt: Bilingual;
+  heading: Bilingual;
+  body: Bilingual;
+};
 
 export type JourneyContent = {
-  beginning: { image: string; imageAlt: Bilingual; heading: Bilingual; body: Bilingual };
-  inspiration: { image: string; imageAlt: Bilingual; heading: Bilingual; body: Bilingual };
-  philosophy: {
-    image: string;
-    imageAlt: Bilingual;
-    heading: Bilingual;
-    body: Bilingual;
-    pillars: { icon: PillarIcon; label: Bilingual }[];
-  };
-  making: {
-    image: string;
-    imageAlt: Bilingual;
-    heading: Bilingual;
-    body: Bilingual;
-    steps: { label: Bilingual }[];
-  };
-  collection: {
-    image: string;
-    imageAlt: Bilingual;
-    heading: Bilingual;
-    body: Bilingual;
-    palette: { label: Bilingual; swatch: string }[];
-    cta: { label: Bilingual; href: string };
-  };
-  continues: {
-    heading: Bilingual;
-    wordmark: string;
-    tagline: Bilingual;
-    cta: { label: Bilingual; href: string };
-  };
+  listening: Chapter;
+  source: Chapter;
+  voice: Chapter;
+  firstpiece: Chapter;
 };
 
 export const journeyMeta = raw.meta as {
@@ -86,9 +66,27 @@ export const journeyMenu = raw.menu as {
   siteLinks: { label: Bilingual; href: string }[];
 };
 
+export const journeyIntro = raw.intro as {
+  bg: string;
+  ink: string;
+  accent: string;
+  body: Bilingual;
+};
+
 export const journeySections = raw.sections as JourneySection[];
 
 export const journeyContent = raw.content as unknown as JourneyContent;
+
+export const journeyClosing = raw.closing as {
+  bg: string;
+  ink: string;
+  accent: string;
+  lines: Bilingual;
+  body: Bilingual;
+  wordmark: string;
+  tagline: Bilingual;
+  cta: { label: Bilingual; href: string };
+};
 
 // ---- Motion tuning (not content) -----------------------------------
 // One place to slow the whole page down or speed it up. Durations in

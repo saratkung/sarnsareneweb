@@ -2,11 +2,11 @@
 
 // ============================================================
 // SARNSARENE — /admin/journey editor.
-// Edits lib/journey.content.json (via /api/journey) and the six
+// Edits lib/journey.content.json (via /api/journey) and the
 // /journey images (via /api/upload). Dev-only, like /admin/site.
 //
 // To add / relabel a field: edit GROUPS below. Paths are dot-paths
-// into the JSON (e.g. "content.beginning.heading.th",
+// into the JSON (e.g. "content.listening.heading.th",
 // "sections.2.accent").
 // ============================================================
 
@@ -24,25 +24,23 @@ type Group = {
   fields: Field[];
 };
 
-// section index in the JSON `sections` array
+// numbered chapters — index into the JSON `sections` array
 const CHAPTERS = [
-  { key: "beginning", i: 0, n: "01", th: "จุดเริ่มต้น", en: "The Beginning" },
-  { key: "inspiration", i: 1, n: "02", th: "แรงบันดาลใจ", en: "The Inspiration" },
-  { key: "philosophy", i: 2, n: "03", th: "ปรัชญา", en: "The Philosophy" },
-  { key: "making", i: 3, n: "04", th: "การสร้างสรรค์", en: "The Making" },
-  { key: "collection", i: 4, n: "05", th: "คอลเลกชันแรก", en: "The First Collection" },
-  { key: "continues", i: 5, n: "06", th: "การเดินทางต่อไป", en: "The Journey Continues" },
+  { key: "listening", i: 0, n: "01", th: "การรับฟัง", en: "Listening", slot: "journey-listening" },
+  { key: "source", i: 1, n: "02", th: "กลับไปหาต้นทาง", en: "Returning to the Source", slot: "journey-source" },
+  { key: "voice", i: 2, n: "03", th: "ผู้ร่วมสะท้อนคุณค่า", en: "Finding a Shared Voice", slot: "journey-voice" },
+  { key: "firstpiece", i: 3, n: "04", th: "การเดินทางครั้งแรก", en: "The First Piece", slot: "journey-firstpiece" },
 ] as const;
 
-const colorTrio = (i: number): Field[] => [
-  { path: `sections.${i}.bg`, label: "สีพื้นหลัง", type: "color" },
-  { path: `sections.${i}.ink`, label: "สีตัวอักษร", type: "color" },
-  { path: `sections.${i}.accent`, label: "สีเน้น (เส้น/เลข)", type: "color" },
-];
-
-const bilingual = (path: string, label: string, type: "text" | "textarea" = "text"): Field[] => [
+const bi = (path: string, label: string, type: "text" | "textarea" = "text"): Field[] => [
   { path: `${path}.th`, label: `${label} (ไทย)`, type },
   { path: `${path}.en`, label: `${label} (อังกฤษ)`, type },
+];
+
+const colors = (base: string): Field[] => [
+  { path: `${base}.bg`, label: "สีพื้นหลัง", type: "color" },
+  { path: `${base}.ink`, label: "สีตัวอักษร", type: "color" },
+  { path: `${base}.accent`, label: "สีเน้น (เส้น/เลข)", type: "color" },
 ];
 
 const GROUPS: Group[] = [
@@ -58,12 +56,12 @@ const GROUPS: Group[] = [
       { path: "meta.description", label: "คำอธิบายหน้า (share)", type: "textarea" },
       { path: "meta.brand", label: "ชื่อแบรนด์ (มุมซ้ายบน)" },
       { path: "meta.sideLabel", label: "ข้อความแนวตั้งขอบซ้าย" },
-      ...bilingual("meta.backLabel", "ปุ่มกลับหน้าหลัก"),
+      ...bi("meta.backLabel", "ปุ่มกลับหน้าหลัก"),
       { path: "meta.backHref", label: "ลิงก์ปุ่มกลับ" },
       { path: "hero.lineTop", label: "Hero — บรรทัดบน" },
       { path: "hero.lineMid", label: "Hero — บรรทัดกลาง" },
       { path: "hero.lineBottom", label: "Hero — บรรทัดล่าง" },
-      ...bilingual("hero.scrollCue", "ข้อความ Scroll cue"),
+      ...bi("hero.scrollCue", "ข้อความ Scroll cue"),
     ],
   },
   {
@@ -72,66 +70,56 @@ const GROUPS: Group[] = [
     th: "เมนู (overlay)",
     en: "Menu",
     fields: [
-      ...bilingual("menu.siteLinks.0.label", "ลิงก์ 1 — ข้อความ"),
+      ...bi("menu.siteLinks.0.label", "ลิงก์ 1 — ข้อความ"),
       { path: "menu.siteLinks.0.href", label: "ลิงก์ 1 — URL" },
-      ...bilingual("menu.siteLinks.1.label", "ลิงก์ 2 — ข้อความ"),
+      ...bi("menu.siteLinks.1.label", "ลิงก์ 2 — ข้อความ"),
       { path: "menu.siteLinks.1.href", label: "ลิงก์ 2 — URL" },
+    ],
+  },
+  {
+    id: "intro",
+    n: "0I",
+    th: "บทนำ (ข้อความเปิด)",
+    en: "Intro",
+    open: true,
+    fields: [
+      ...colors("intro"),
+      ...bi("intro.body", "ข้อความเปิด (เว้นบรรทัดว่าง = ย่อหน้าใหม่)", "textarea"),
     ],
   },
   ...CHAPTERS.map((ch): Group => {
     const base = `content.${ch.key}`;
-    const fields: Field[] = [
-      ...colorTrio(ch.i),
-      ...bilingual(`sections.${ch.i}.kicker`, "หัวข้อเล็ก (kicker)"),
-      ...bilingual(`${base}.heading`, "หัวข้อใหญ่ (ขึ้นบรรทัดใหม่ด้วย Enter)", "textarea"),
-    ];
-    if (ch.key !== "continues") {
-      fields.push(...bilingual(`${base}.body`, "เนื้อความ", "textarea"));
-      fields.push(...bilingual(`${base}.imageAlt`, "คำอธิบายภาพ (alt)"));
-    }
-    if (ch.key === "philosophy") {
-      for (let p = 0; p < 3; p++)
-        fields.push(...bilingual(`${base}.pillars.${p}.label`, `ไอคอน ${p + 1} — ข้อความ`));
-    }
-    if (ch.key === "making") {
-      for (let st = 0; st < 5; st++)
-        fields.push(...bilingual(`${base}.steps.${st}.label`, `ขั้นตอน ${st + 1}`, "textarea"));
-    }
-    if (ch.key === "collection") {
-      for (let c = 0; c < 4; c++) {
-        fields.push(...bilingual(`${base}.palette.${c}.label`, `สี ${c + 1} — ชื่อ`));
-        fields.push({ path: `${base}.palette.${c}.swatch`, label: `สี ${c + 1} — ค่าสี`, type: "color" });
-      }
-      fields.push(...bilingual(`${base}.cta.label`, "ปุ่ม — ข้อความ"));
-      fields.push({ path: `${base}.cta.href`, label: "ปุ่ม — ลิงก์" });
-    }
-    if (ch.key === "continues") {
-      fields.push({ path: `${base}.wordmark`, label: "Wordmark" });
-      fields.push(...bilingual(`${base}.tagline`, "Tagline"));
-      fields.push(...bilingual(`${base}.cta.label`, "ปุ่ม — ข้อความ"));
-      fields.push({ path: `${base}.cta.href`, label: "ปุ่ม — ลิงก์" });
-    }
-
-    const g: Group = {
+    return {
       id: ch.key,
       n: ch.n,
       th: ch.th,
       en: ch.en,
       open: ch.i === 0,
-      fields,
+      image: { slot: ch.slot, pathForSrc: `${base}.image`, label: "ภาพประกอบบท" },
+      fields: [
+        ...colors(`sections.${ch.i}`),
+        ...bi(`sections.${ch.i}.kicker`, "หัวข้อเล็ก (kicker)"),
+        ...bi(`${base}.heading`, "หัวข้อใหญ่ (ขึ้นบรรทัดใหม่ด้วย Enter)", "textarea"),
+        ...bi(`${base}.body`, "เนื้อความ (เว้นบรรทัดว่าง = ย่อหน้าใหม่)", "textarea"),
+        ...bi(`${base}.imageAlt`, "คำอธิบายภาพ (alt)"),
+      ],
     };
-    if (ch.key !== "continues") {
-      const slotMap: Record<string, string> = {
-        beginning: "journey-beginning",
-        inspiration: "journey-inspiration",
-        philosophy: "journey-philosophy",
-        making: "journey-making",
-        collection: "journey-collection",
-      };
-      g.image = { slot: slotMap[ch.key], pathForSrc: `${base}.image`, label: "ภาพประกอบบท" };
-    }
-    return g;
   }),
+  {
+    id: "closing",
+    n: "05",
+    th: "บทปิด",
+    en: "Closing",
+    fields: [
+      ...colors("closing"),
+      ...bi("closing.lines", "บรรทัดสรุป (ขึ้นบรรทัดใหม่ด้วย Enter)", "textarea"),
+      ...bi("closing.body", "ย่อหน้าปิด", "textarea"),
+      { path: "closing.wordmark", label: "Wordmark" },
+      ...bi("closing.tagline", "Tagline"),
+      ...bi("closing.cta.label", "ปุ่ม — ข้อความ"),
+      { path: "closing.cta.href", label: "ปุ่ม — ลิงก์" },
+    ],
+  },
 ];
 
 // ---- path helpers -------------------------------------------------
