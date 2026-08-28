@@ -2,10 +2,10 @@
 // SARNSARENE — database schema.
 //
 // PostgreSQL (Neon / Vercel Postgres / Supabase / local).
-//   DATABASE_URL  — pooled connection, used by the app at runtime
-//   DIRECT_URL    — direct connection, used by `prisma migrate`
-// (Neon and Vercel Postgres provide both; for a plain Postgres,
-// point both at the same URL.)
+//   DATABASE_URL          — pooled connection, used by the app at runtime
+//   DATABASE_URL_UNPOOLED — direct connection, used by `prisma migrate`
+// The Neon (incl. Vercel Storage → Neon) integration injects both names.
+// For a plain Postgres, point both at the same URL.
 //
 // Enum-like columns (role, status, payment method…) are stored as
 // String and validated in the domain layer.
@@ -18,7 +18,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 // ---- Identity ---------------------------------------------------------
