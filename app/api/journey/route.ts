@@ -16,30 +16,14 @@ const bi = (v: any) => ({ th: s(v?.th), en: s(v?.en) });
 /**
  * Rebuild the file from a fixed schema so a broken or hostile payload
  * can never write malformed / unexpected JSON. Structural fields
- * (id / index / layout, pillar icons) are taken from the payload only
- * where they are constrained, else from the shipped defaults.
+ * (id / index / layout) always come from the shipped defaults.
  */
 function buildJourneyJson(d: any) {
   const def = raw as any;
-  const LAYOUTS = new Set(["split", "full-bleed", "centered"]);
-  const ICONS = new Set(["harmony", "balance", "serenity"]);
-
-  const sections = def.sections.map((base: any, i: number) => {
-    const inc = d?.sections?.[i] ?? {};
-    return {
-      id: base.id,
-      index: base.index,
-      layout: LAYOUTS.has(inc.layout) ? inc.layout : base.layout,
-      kicker: bi(inc.kicker ?? base.kicker),
-      bg: s(inc.bg ?? base.bg),
-      ink: s(inc.ink ?? base.ink),
-      accent: s(inc.accent ?? base.accent),
-    };
-  });
-
-  const c = d?.content ?? {};
   const dc = def.content;
-  const simple = (key: string) => {
+  const c = d?.content ?? {};
+
+  const chapter = (key: string) => {
     const x = c[key] ?? {};
     const b = dc[key];
     return {
@@ -74,45 +58,41 @@ function buildJourneyJson(d: any) {
         return { label: bi(inc.label ?? b.label), href: s(inc.href ?? b.href) };
       }),
     },
-    sections,
+    intro: {
+      bg: s(d?.intro?.bg ?? def.intro.bg),
+      ink: s(d?.intro?.ink ?? def.intro.ink),
+      accent: s(d?.intro?.accent ?? def.intro.accent),
+      body: bi(d?.intro?.body ?? def.intro.body),
+    },
+    sections: def.sections.map((base: any, i: number) => {
+      const inc = d?.sections?.[i] ?? {};
+      return {
+        id: base.id,
+        index: base.index,
+        layout: base.layout,
+        kicker: bi(inc.kicker ?? base.kicker),
+        bg: s(inc.bg ?? base.bg),
+        ink: s(inc.ink ?? base.ink),
+        accent: s(inc.accent ?? base.accent),
+      };
+    }),
     content: {
-      beginning: simple("beginning"),
-      inspiration: simple("inspiration"),
-      philosophy: {
-        ...simple("philosophy"),
-        pillars: dc.philosophy.pillars.map((b: any, i: number) => {
-          const inc = c?.philosophy?.pillars?.[i] ?? {};
-          return {
-            icon: ICONS.has(inc.icon) ? inc.icon : b.icon,
-            label: bi(inc.label ?? b.label),
-          };
-        }),
-      },
-      making: {
-        ...simple("making"),
-        steps: dc.making.steps.map((b: any, i: number) => ({
-          label: bi(c?.making?.steps?.[i]?.label ?? b.label),
-        })),
-      },
-      collection: {
-        ...simple("collection"),
-        palette: dc.collection.palette.map((b: any, i: number) => {
-          const inc = c?.collection?.palette?.[i] ?? {};
-          return { label: bi(inc.label ?? b.label), swatch: s(inc.swatch ?? b.swatch) };
-        }),
-        cta: {
-          label: bi(c?.collection?.cta?.label ?? dc.collection.cta.label),
-          href: s(c?.collection?.cta?.href ?? dc.collection.cta.href),
-        },
-      },
-      continues: {
-        heading: bi(c?.continues?.heading ?? dc.continues.heading),
-        wordmark: s(c?.continues?.wordmark ?? dc.continues.wordmark),
-        tagline: bi(c?.continues?.tagline ?? dc.continues.tagline),
-        cta: {
-          label: bi(c?.continues?.cta?.label ?? dc.continues.cta.label),
-          href: s(c?.continues?.cta?.href ?? dc.continues.cta.href),
-        },
+      listening: chapter("listening"),
+      source: chapter("source"),
+      voice: chapter("voice"),
+      firstpiece: chapter("firstpiece"),
+    },
+    closing: {
+      bg: s(d?.closing?.bg ?? def.closing.bg),
+      ink: s(d?.closing?.ink ?? def.closing.ink),
+      accent: s(d?.closing?.accent ?? def.closing.accent),
+      lines: bi(d?.closing?.lines ?? def.closing.lines),
+      body: bi(d?.closing?.body ?? def.closing.body),
+      wordmark: s(d?.closing?.wordmark ?? def.closing.wordmark),
+      tagline: bi(d?.closing?.tagline ?? def.closing.tagline),
+      cta: {
+        label: bi(d?.closing?.cta?.label ?? def.closing.cta.label),
+        href: s(d?.closing?.cta?.href ?? def.closing.cta.href),
       },
     },
   };
