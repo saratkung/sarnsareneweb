@@ -78,12 +78,27 @@ export function JourneyChrome({
       {/* ---- Top bar ---- */}
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-5 py-5 md:px-10 md:py-7">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between">
-          <Link
-            href="/"
-            className="pointer-events-auto font-serif text-sm tracking-[0.34em] opacity-90 transition-opacity hover:opacity-100 md:text-base"
-          >
-            {journeyMeta.brand}
-          </Link>
+          <div className="pointer-events-auto flex items-center gap-3.5 md:gap-4">
+            <Link
+              href={journeyMeta.backHref}
+              className="group flex items-center gap-1.5 text-[10px] tracking-[0.25em] opacity-55 transition-opacity hover:opacity-100"
+            >
+              <span
+                aria-hidden
+                className="inline-block transition-transform duration-300 group-hover:-translate-x-0.5"
+              >
+                ←
+              </span>
+              <span className="hidden sm:inline">{pick(journeyMeta.backLabel)}</span>
+            </Link>
+            <span className="hidden h-3 w-px bg-current/25 sm:block" />
+            <Link
+              href={journeyMeta.backHref}
+              className="font-serif text-sm tracking-[0.34em] opacity-90 transition-opacity hover:opacity-100 md:text-base"
+            >
+              {journeyMeta.brand}
+            </Link>
+          </div>
 
           <div className="pointer-events-auto flex items-center gap-5 md:gap-7">
             <button
