@@ -22,6 +22,13 @@ const SLOT_TO_FILENAME: Record<string, string> = {
   "product-5-grey": "product-5-grey.jpg",
   journey: "journey.jpg",
   sustainability: "sustainability.jpg",
+  // /journey page imagery (kept under public/images/journey/).
+  "journey-hero": "journey/journey-hero.webp",
+  "journey-beginning": "journey/beginning.webp",
+  "journey-inspiration": "journey/inspiration.webp",
+  "journey-philosophy": "journey/philosophy.webp",
+  "journey-making": "journey/making.webp",
+  "journey-collection": "journey/collection.webp",
 };
 
 export async function POST(req: NextRequest) {
