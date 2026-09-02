@@ -73,51 +73,53 @@ export default function HighlightQuote() {
           </motion.div>
         </motion.div>
 
-        {/* hold the left in shadow for the type; let the fibre read on the right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1F1E1B] via-[#1F1E1B]/78 to-[#1F1E1B]/35" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1F1E1B]/70 via-transparent to-[#1F1E1B]/85" />
+        {/* pool the dark toward the centre so the fibre still reads at the edges */}
+        <div className="absolute inset-0 bg-[#1F1E1B]/50" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(58% 60% at 50% 50%, rgba(31,30,27,0.72) 0%, rgba(31,30,27,0.4) 55%, rgba(31,30,27,0.15) 100%)",
+          }}
+        />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#1F1E1B] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#1F1E1B] to-transparent" />
 
         <motion.div
           style={{
             opacity: reduce ? 1 : sceneOpacity,
             y: reduce ? 0 : sceneY,
           }}
-          className="relative z-10 h-full max-w-content mx-auto px-6 md:px-10 flex flex-col justify-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
-          <div className="grid md:grid-cols-[auto_1fr] gap-x-6 md:gap-x-12 items-start max-w-4xl">
-            <div className="hidden md:flex flex-col items-start gap-3 pt-2">
-              <span className="h-px w-8 bg-text-light/35" />
-              <span className="caption text-text-light/50">Philosophy</span>
-            </div>
+          <motion.div
+            style={{ opacity: reduce ? 1 : marksOpacity }}
+            className="flex flex-col items-center gap-4 mb-7"
+          >
+            <span className="h-px w-10 bg-text-light/30" />
+            <span className="caption text-text-light/45">Philosophy</span>
+            <span
+              aria-hidden
+              className="font-serif text-gold text-4xl md:text-5xl leading-none select-none"
+            >
+              &ldquo;
+            </span>
+          </motion.div>
 
-            <div className="relative">
-              <motion.span
-                aria-hidden
-                style={{ opacity: reduce ? 1 : marksOpacity }}
-                className="absolute -left-1 -top-6 md:-top-8 font-serif text-gold text-5xl md:text-7xl leading-none select-none"
-              >
-                &ldquo;
-              </motion.span>
-
-              <motion.blockquote
-                style={{
-                  clipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
-                  WebkitClipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
-                  filter: reduce ? "none" : quoteBlur,
-                  y: reduce ? 0 : quoteY,
-                }}
-                className="font-serif font-light text-text-light text-[clamp(1.4rem,3.2vw,2.4rem)] leading-[1.62] max-w-3xl"
-              >
-                {quote}
-                <span
-                  aria-hidden
-                  className="font-serif text-gold align-baseline ml-1"
-                >
-                  &rdquo;
-                </span>
-              </motion.blockquote>
-            </div>
-          </div>
+          <motion.blockquote
+            style={{
+              clipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
+              WebkitClipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
+              filter: reduce ? "none" : quoteBlur,
+              y: reduce ? 0 : quoteY,
+            }}
+            className="font-serif font-light text-text-light text-[clamp(1.3rem,2.9vw,2.1rem)] leading-[1.62] w-full max-w-[min(88vw,37rem)] text-balance"
+          >
+            {quote}
+            <span aria-hidden className="font-serif text-gold align-baseline ml-1">
+              &rdquo;
+            </span>
+          </motion.blockquote>
         </motion.div>
 
         <motion.p
