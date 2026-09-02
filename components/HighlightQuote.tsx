@@ -13,11 +13,13 @@ import { highlightQuote } from "@/lib/content";
 import { en } from "@/lib/translations";
 import { useLanguage } from "@/components/LanguageContext";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export default function HighlightQuote() {
   const { lang } = useLanguage();
-  const quote = lang === "en" ? en.highlightQuote.quote : highlightQuote.quote;
+  const raw = lang === "en" ? en.highlightQuote.quote : highlightQuote.quote;
+  // Bind the Thai repetition mark ("ๆ") to the word before it so it is
+  // never stranded at the start of a line.
+  const quote = raw.replace(/ ๆ/g, " ๆ");
+  const attribution = highlightQuote.attribution.replace(/^—\s*/, "");
   const reduce = useReduceMotion();
   const ref = useRef<HTMLElement>(null);
 
@@ -26,112 +28,76 @@ export default function HighlightQuote() {
     offset: ["start start", "end end"],
   });
 
-  // The weave surfaces from the black, holds long, then recedes.
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.12, 0.9, 1], [0, 1, 1, 0.12]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "5%"]);
+  // One slow, quiet breath: the words rise and sharpen, hold at rest for
+  // most of the pin, then lift away. Nothing wipes or snaps.
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.24, 0.82, 1],
+    [0, 1, 1, 0],
+  );
+  const y = useTransform(scrollYProgress, [0, 0.32, 0.75, 1], [56, 0, 0, -56]);
+  const blurPx = useTransform(scrollYProgress, [0, 0.28], [8, 0]);
+  const blur = useMotionTemplate`blur(${blurPx}px)`;
 
-  // The words are drawn in, top to bottom, like thread pulled through.
-  const clipPct = useTransform(scrollYProgress, [0.06, 0.3], ["100%", "0%"]);
-  const clip = useMotionTemplate`inset(0% 0% ${clipPct} 0%)`;
-  const quoteBlurPx = useTransform(scrollYProgress, [0.06, 0.32], [6, 0]);
-  const quoteBlur = useMotionTemplate`blur(${quoteBlurPx}px)`;
-  const quoteY = useTransform(scrollYProgress, [0, 0.4], [24, 0]);
+  // A hairline that draws down as the quote settles.
+  const lineScale = useTransform(scrollYProgress, [0.06, 0.3], [0, 1]);
 
-  const marksOpacity = useTransform(scrollYProgress, [0.12, 0.34], [0, 1]);
-  const attribOpacity = useTransform(scrollYProgress, [0.28, 0.5, 0.92, 1], [0, 1, 1, 0]);
-  const attribY = useTransform(scrollYProgress, [0.28, 0.5], [16, 0]);
-
-  // The whole scene holds through the pin, then lifts away at the very end.
-  const sceneOpacity = useTransform(scrollYProgress, [0.88, 1], [1, 0]);
-  const sceneY = useTransform(scrollYProgress, [0.7, 1], [0, -54]);
+  // The faint weave, barely there, drifting.
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-3%", "4%"]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.85, 1], [0, 0.16, 0.16, 0.04]);
 
   return (
     <section
       ref={ref}
       data-scroll-section
       data-mood="dark"
-      className="relative h-[240vh] bg-[#1F1E1B]"
+      className="relative h-[180vh] bg-[#1F1E1B]"
     >
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* the woven fibre, held in the dark */}
         <motion.div
-          className="absolute inset-[-5%]"
-          style={{ y: reduce ? 0 : bgY, scale: reduce ? 1 : bgScale }}
+          aria-hidden
+          className="absolute inset-[-4%]"
+          style={{ y: reduce ? 0 : bgY, opacity: reduce ? 0.12 : bgOpacity }}
         >
-          <motion.div
-            className="absolute inset-0"
-            style={{ opacity: reduce ? 0.9 : bgOpacity }}
-          >
-            <Image
-              src="/images/weave-hero.png"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-          </motion.div>
+          <Image
+            src="/images/weave-hero.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover blur-[2px]"
+          />
         </motion.div>
-
-        {/* pool the dark toward the centre so the fibre still reads at the edges */}
-        <div className="absolute inset-0 bg-[#1F1E1B]/50" />
+        {/* a soft breath of shadow at the centre, deep black at the seams */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(58% 60% at 50% 50%, rgba(31,30,27,0.72) 0%, rgba(31,30,27,0.4) 55%, rgba(31,30,27,0.15) 100%)",
+              "radial-gradient(70% 68% at 50% 50%, rgba(31,30,27,0.35) 0%, rgba(31,30,27,0.78) 78%, #1F1E1B 100%)",
           }}
         />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#1F1E1B] to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#1F1E1B] to-transparent" />
 
         <motion.div
           style={{
-            opacity: reduce ? 1 : sceneOpacity,
-            y: reduce ? 0 : sceneY,
+            opacity: reduce ? 1 : opacity,
+            y: reduce ? 0 : y,
+            filter: reduce ? "none" : blur,
           }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
-          <motion.div
-            style={{ opacity: reduce ? 1 : marksOpacity }}
-            className="flex flex-col items-center gap-4 mb-7"
-          >
-            <span className="h-px w-10 bg-text-light/30" />
-            <span className="caption text-text-light/45">Philosophy</span>
-            <span
-              aria-hidden
-              className="font-serif text-gold text-4xl md:text-5xl leading-none select-none"
-            >
-              &ldquo;
-            </span>
-          </motion.div>
+          <motion.span
+            aria-hidden
+            style={{ scaleY: reduce ? 1 : lineScale }}
+            className="block h-14 w-px origin-top bg-text-light/25 mb-12 md:mb-16"
+          />
 
-          <motion.blockquote
-            style={{
-              clipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
-              WebkitClipPath: reduce ? "inset(0% 0% 0% 0%)" : clip,
-              filter: reduce ? "none" : quoteBlur,
-              y: reduce ? 0 : quoteY,
-            }}
-            className="font-serif font-light text-text-light text-[clamp(1.3rem,2.9vw,2.1rem)] leading-[1.62] w-full max-w-[min(88vw,37rem)] text-balance"
-          >
-            {quote}
-            <span aria-hidden className="font-serif text-gold align-baseline ml-1">
-              &rdquo;
-            </span>
-          </motion.blockquote>
+          <blockquote className="font-serif font-light italic text-text-light text-[clamp(1.45rem,3vw,2.35rem)] leading-[1.66] w-full max-w-[min(90vw,38rem)] text-balance">
+            &ldquo;{quote}&rdquo;
+          </blockquote>
+
+          <p className="mt-12 md:mt-16 text-[10px] tracking-[0.44em] uppercase text-text-light/40">
+            {attribution}
+          </p>
         </motion.div>
-
-        <motion.p
-          style={{
-            opacity: reduce ? 1 : attribOpacity,
-            y: reduce ? 0 : attribY,
-          }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 text-[10px] tracking-[0.42em] uppercase text-text-light/50"
-        >
-          <span className="h-px w-6 bg-text-light/30" />
-          {highlightQuote.attribution.replace(/^—\s*/, "")}
-        </motion.p>
       </div>
     </section>
   );
