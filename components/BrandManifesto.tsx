@@ -3,31 +3,45 @@
 import { brandManifesto } from "@/lib/content";
 import { en } from "@/lib/translations";
 import { useLanguage } from "@/components/LanguageContext";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, ChapterMark } from "@/components/Reveal";
 
 export default function BrandManifesto() {
   const { lang } = useLanguage();
   const title = lang === "en" ? en.brandManifesto.title : brandManifesto.title;
-  const paragraphs = lang === "en" ? en.brandManifesto.paragraphs : brandManifesto.paragraphs;
+  const paragraphs =
+    lang === "en" ? en.brandManifesto.paragraphs : brandManifesto.paragraphs;
 
   return (
-    <section className="bg-bg py-24 md:py-32">
+    <section
+      id="manifesto"
+      data-scroll-section
+      data-mood="ivory"
+      data-rail="04"
+      className="py-28 md:py-48"
+    >
       <div className="max-w-content mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr,1.4fr] gap-12 md:gap-20">
-          <Reveal>
-            <p className="eyebrow mb-4">{brandManifesto.eyebrow}</p>
-            <h2 className="font-serif font-normal text-[28px] md:text-[34px] leading-snug text-text-light md:sticky md:top-32">
-              {title}
-            </h2>
+        <div className="grid md:grid-cols-[auto_1fr] gap-y-12 md:gap-x-20">
+          <Reveal className="md:pt-2">
+            <ChapterMark index={4} total={4} />
           </Reveal>
-          <div className="space-y-8">
-            {paragraphs.map((p, i) => (
-              <Reveal key={i} delay={i * 0.12}>
-                <p className="text-text-muted text-[15px] md:text-[16px] leading-[1.9] font-light max-w-2xl">
-                  {p}
-                </p>
-              </Reveal>
-            ))}
+
+          <div className="grid md:grid-cols-[0.95fr_1.05fr] gap-y-12 md:gap-x-20">
+            <Reveal blur>
+              <p className="eyebrow mb-6">{brandManifesto.eyebrow}</p>
+              <h2 className="display text-[clamp(2rem,4.6vw,3.4rem)] text-text-light md:sticky md:top-32">
+                {title}
+              </h2>
+            </Reveal>
+
+            <div className="space-y-10 md:pt-2">
+              {paragraphs.map((p, i) => (
+                <Reveal key={i} blur delay={i * 0.1}>
+                  <p className="body-copy text-[15px] md:text-[16px] max-w-2xl">
+                    {p}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </div>

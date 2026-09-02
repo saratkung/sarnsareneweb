@@ -24,29 +24,29 @@ export default function Footer() {
   const otherColumns = footer.columns.filter((c) => c.title !== "Follow Us");
 
   return (
-    <footer id="contact" className="bg-bg pt-20 md:pt-28 pb-10">
+    <footer id="contact" className="bg-bg pt-28 md:pt-40 pb-12">
       <div className="max-w-content mx-auto px-6 md:px-10">
-        <Reveal className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-10 mb-16">
-          <div>
-            <p className="font-serif text-xl tracking-[0.25em] uppercase text-text-light mb-4">
-              {brand.name}
-            </p>
-            <p className="text-text-muted text-[11px] leading-relaxed whitespace-pre-line font-light">
-              {tagline}
-            </p>
-          </div>
+        <Reveal className="text-center mb-20 md:mb-28">
+          <p className="display text-[clamp(2rem,7vw,4.5rem)] tracking-[0.22em] uppercase text-text-light">
+            {brand.name}
+          </p>
+          <p className="mt-6 body-copy text-[12px] whitespace-pre-line">
+            {tagline}
+          </p>
+        </Reveal>
 
+        <div className="hairline mb-14" />
+
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-12 mb-20">
           {otherColumns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-[10px] tracking-widest2 uppercase text-text-muted mb-5">
-                {col.title}
-              </h4>
+              <h4 className="caption mb-6">{col.title}</h4>
               <ul className="space-y-3">
                 {col.items.map((item) => (
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-[12px] text-text-muted hover:text-text-light transition-colors duration-300"
+                      className="text-[12px] text-text-light/60 hover:text-text-light transition-colors duration-300 link-underline"
                     >
                       {item}
                     </a>
@@ -58,9 +58,7 @@ export default function Footer() {
 
           {followColumn && (
             <div>
-              <h4 className="text-[10px] tracking-widest2 uppercase text-text-muted mb-5">
-                {followColumn.title}
-              </h4>
+              <h4 className="caption mb-6">{followColumn.title}</h4>
               <ul className="flex flex-wrap gap-3">
                 {followColumn.items.map((item) => (
                   <li key={item}>
@@ -70,7 +68,7 @@ export default function Footer() {
                       rel={socialLinks[item] ? "noopener noreferrer" : undefined}
                       aria-label={item}
                       title={item}
-                      className="flex items-center justify-center w-8 h-8 rounded-full border border-text-light/8 text-[9px] tracking-wide text-text-muted hover:border-gold hover:text-gold transition-colors duration-300"
+                      className="flex items-center justify-center w-9 h-9 rounded-full border border-text-light/15 text-[9px] tracking-wide text-text-light/60 hover:border-gold hover:text-gold transition-colors duration-300"
                     >
                       {socialMonograms[item] ?? item.slice(0, 2).toUpperCase()}
                     </a>
@@ -79,11 +77,11 @@ export default function Footer() {
               </ul>
             </div>
           )}
-        </Reveal>
+        </div>
 
         <div className="hairline mb-8" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] tracking-wide text-text-muted">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] tracking-[0.2em] uppercase text-text-light/45">
           <span>{footer.copyright}</span>
           <span>{footer.legal}</span>
         </div>

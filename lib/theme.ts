@@ -38,32 +38,43 @@ export type SectionOverride = {
   gold: string;
 };
 
+// ------------------------------------------------------------
+// Quiet Luxury palette — linen + paper + natural fibre + stone.
+//   Warm Ivory   #F5F2EB   primary ground
+//   Soft Sand    #E8E1D5   secondary ground
+//   Natural Beige#D4C7B5   tactile mid-tone
+//   Deep Charcoal#1F1E1B   primary ink
+//   Muted Taupe  #756D63   secondary ink (handled via text-muted token)
+//   Bronze       #8C7A5E   restrained accent — never metallic gold
+// The one dark beat in the page (hero backdrop + the pinned
+// quote) inverts to charcoal ground / ivory ink.
+// ------------------------------------------------------------
 export const theme = {
   colors: {
-    bg: "#2B2B2B",
-    bgSecondary: "#343434",
-    beige: "#BC9A7A",
-    gold: "#CDA364",
-    textLight: "#FEF5E1",
+    bg: "#F5F2EB",
+    bgSecondary: "#E8E1D5",
+    beige: "#D4C7B5",
+    gold: "#8C7A5E",
+    textLight: "#1F1E1B",
   },
   sections: {
-    nav: { bg: "#ffffff", textLight: "#2B2B2B", gold: "#f9f8f5" },
-    announcement: { bg: "#ffffff", textLight: "#2B2B2B", gold: "#ffffff" },
-    hero: { bg: "#2B2B2B", textLight: "#FEF5E1", gold: "#CDA364" },
-    philosophy: { bg: "#fcfcfc", textLight: "#2B2B2B", gold: "#fafafa" },
-    ourStory: { bg: "#2e2e2e", textLight: "#FEF5E1", gold: "#CDA364" },
-    eastern: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    signature: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    quote: { bg: "#ffffff", textLight: "#2B2B2B", gold: "#CDA364" },
-    manifesto: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    collection: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    journey: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    services: { bg: "#ffffff", textLight: "#2B2B2B", gold: "#CDA364" },
-    sustainability: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
-    newsletter: { bg: "#ffffff", textLight: "#2B2B2B", gold: "#CDA364" },
-    footer: { bg: "#ffffff", textLight: "#000000", gold: "#CDA364" },
+    nav: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    announcement: { bg: "#1F1E1B", textLight: "#F5F2EB", gold: "#C9BAA3" },
+    hero: { bg: "#1F1E1B", textLight: "#F5F2EB", gold: "#C9BAA3" },
+    philosophy: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    ourStory: { bg: "#EFEBE1", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    eastern: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    signature: { bg: "#EFEBE1", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    quote: { bg: "#1F1E1B", textLight: "#F5F2EB", gold: "#C9BAA3" },
+    manifesto: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    collection: { bg: "#EFEBE1", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    journey: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    services: { bg: "#F5F2EB", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    sustainability: { bg: "#EFEBE1", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    newsletter: { bg: "#E8E1D5", textLight: "#1F1E1B", gold: "#8C7A5E" },
+    footer: { bg: "#E8E1D5", textLight: "#1F1E1B", gold: "#8C7A5E" },
   } as Record<SectionKey, SectionOverride>,
-  heroOverlayOpacity: 0.3,
+  heroOverlayOpacity: 0.28,
   journeyOverlayOpacity: 0.8,
   imageBrightness: 1,
 };

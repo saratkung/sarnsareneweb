@@ -29,7 +29,7 @@ export const hero = {
   subtitle: "สัมผัสแห่งความสงบอันปราณีต",
   ctaPrimary: { label: "", href: "#collection" },
   ctaSecondary: { label: "", href: "#philosophy" },
-  image: "/images/hero.jpg",
+  image: "/images/weave-hero.png",
 };
 
 export const philosophy = {
@@ -51,8 +51,8 @@ export const ourStory = {
     "เรื่องราวเริ่มต้นจากความทรงจำอันงดงามของการมองเห็นเส้นใยธรรมชาติถูกถักทอทีละเส้นบนกี่ทอผ้าโบราณ ควบคู่ไปกับกลิ่นหอมอ่อนๆ ของธรรมชาติที่ลอยมาตามลม ช่วงเวลาแห่งความสมดุลนี้ได้จุดประกายความหลงใหลในพลังของการเยียวยา ผ่านสัมผัสที่ละเมียดละไม กลิ่นหอมอันเงียบสงบ และจังหวะที่เรียบง่ายของงานฝีมือแบบ Slow Craftsmanship",
     "ในโลกที่เร่งรีบและเต็มไปด้วยความวุ่นวาย SARNSARENE จึงถูกสร้างขึ้นเพื่อให้ทุกคนได้กลับมารับรู้ถึงความสงบ คืนความสมดุลให้กับกาย จิตใจ และพื้นที่รอบตัว ผ่านความหรูหราที่เรียบง่ายและเหนือกาลเวลา",
   ],
-  image: "/images/story.jpg",
-  bannerImage: "/images/story-banner.jpg",
+  image: "/images/roots-linen.png",
+  bannerImage: "/images/story-view.png",
 };
 
 export const easternInspiration = {

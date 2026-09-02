@@ -1,6 +1,8 @@
 import { announcement } from "@/lib/content";
 
 export default function AnnouncementBar() {
+  if (!announcement.message.trim()) return null;
+
   return (
     <div className="w-full bg-bg text-text-light">
       <div className="max-w-content mx-auto px-6 md:px-10 py-2.5 text-center">
