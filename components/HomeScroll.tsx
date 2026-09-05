@@ -33,6 +33,7 @@ export default function HomeScroll() {
     items: [],
     activeId: null,
   });
+  const [atFoot, setAtFoot] = useState(false);
   const frame = useRef<number | null>(null);
 
   useEffect(() => {
@@ -64,6 +65,13 @@ export default function HomeScroll() {
       if (bestRail) {
         const id = bestRail.el.id;
         setRail((r) => (r.activeId === id ? r : { ...r, activeId: id }));
+      }
+
+      // The rail retires the moment the closing footer begins to show.
+      const foot = document.getElementById("contact");
+      if (foot) {
+        const top = foot.getBoundingClientRect().top;
+        setAtFoot(top < vh * 0.82);
       }
     };
 
@@ -101,9 +109,13 @@ export default function HomeScroll() {
       />
 
       {rail.items.length > 0 && (
-        <nav
+        <motion.nav
           aria-label="Sections"
           className="fixed right-6 lg:right-9 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center"
+          initial={false}
+          animate={{ opacity: atFoot ? 0 : 1 }}
+          transition={{ duration: reduce ? 0 : 0.6, ease: EASE }}
+          style={{ pointerEvents: atFoot ? "none" : "auto" }}
         >
           {rail.items.map((id, i) => {
             const active = rail.activeId === id;
@@ -135,7 +147,7 @@ export default function HomeScroll() {
               </div>
             );
           })}
-        </nav>
+        </motion.nav>
       )}
     </>
   );
